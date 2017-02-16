@@ -24,3 +24,7 @@ $ sudo npm install --save
 $ sudo npm install -g nodemon
 $ nodemon server.js
 ```
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
