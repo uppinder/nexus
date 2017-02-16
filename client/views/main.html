@@ -1,0 +1,17 @@
+<nav class="navbar navbar-inverse" ng-controller="navbarController">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" ui-sref="main">Nexus</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a ui-sref="main.home">Home</a></li>
+      <li><a ui-sref="main.chat">Chat</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><img style="width: 40px;height: 40px;margin-top: 5px;" ng-src="{{profilePic}}"></li>
+      <li><a href="#">{{firstname}}</a></li>
+      <li><a ng-click="logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+<div ui-view></div>
