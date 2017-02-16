@@ -39,19 +39,6 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         restricted: false
       }
     })
-    .state('signup',{
-      url: '/signup',
-      templateUrl: 'views/auth/signup.html',
-      controller: 'signupController',
-      params: {
-        restricted: false
-      }
-    })
-    .state('verify',{
-      url: '/verify/:token',
-      templateUrl: 'views/auth/verify.html',
-      controller: 'verifyController',
-    })
     .state('initialInfo', {
       url: '/initial',
       templateUrl: 'views/auth/initial.html',

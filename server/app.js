@@ -25,7 +25,6 @@ var User = require('./models/user.js');
 //routes
 var authRoutes = require('./routes/auth.js');
 var dataRoutes = require('./routes/userdata.js');
-var verifyRoute = require('./routes/verify.js');
 var uploadRoutes = require('./routes/upload.js');
 
 var app = express();
@@ -57,11 +56,10 @@ require('./socket.js')(io, passport, cookieParser, config.express_session);
 // routes
 app.use('/auth', authRoutes);
 app.use('/user', dataRoutes);
-app.use('/verifyuser', verifyRoute);
 app.use('/upload', uploadRoutes);
 
 app.get('*', function(req, res) {
-	console.log(req);
+	// console.log(req);
 	res.sendFile(path.join(__dirname, '../client', 'index.html'));
 });
 

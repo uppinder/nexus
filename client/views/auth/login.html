@@ -2,15 +2,23 @@
 <div ng-show="error">{{errorMessage}}</div>
 <form ng-submit="login()">
 	<p>
-	<label>Webmail</label>
-	<input type="text" name="username" ng-model="loginForm.username" required>	
+		<label>Webmail:</label>
+		<input type="text" name="username" ng-model="loginForm.username" required>	
 	</p>
 	<p>
-	<label>Password</label>
-	<input type="password" name="password" ng-model="loginForm.password" required>
+		<label>Password:</label>
+		<input type="password" name="password" ng-model="loginForm.password" required>
+	</p>
+	<p>
+		<label>Mail Server:</label>
+		<select name="server" ng-model="loginForm.mailServer">
+		  <option value="">Select</option>
+          <option value="teesta">Teesta</option>
+          <option value="naambor">Naambor</option>
+          <option value="disang">Disang</option>
+          <option value="tamdil">Tamdil</option>
+          <option value="dikrong">Dikrong</option>
+       </select>
 	</p>
 	<button type="submit">Login</button>
 </form>
-<p>
-	<a ng-click="toSignup()">Register</a>
-</p>

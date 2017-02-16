@@ -4,7 +4,7 @@ angular.module('nexus')
 		var messages = [];
 
 		// TODO: This event is not being recevied.
-		chatSocket.on('init', function(data, cb) {
+		chatSocket.on('init', function(data) {
 			console.log('here');
 			// console.log(data);
 			$rootScope.currentUser = data.me;
@@ -12,7 +12,6 @@ angular.module('nexus')
 			// console.log(messages);
 			users_online = data.users_online;
 			chatSocket.forward('update');
-			cb("Ok!");
 		});
 
 		chatSocket.on('new_user', function(data) {

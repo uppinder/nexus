@@ -1,5 +1,5 @@
-angular.module('nexus').controller('initialInfoController', ['$scope', '$state','Upload',	 
-	function($scope, $state, Upload) {
+angular.module('nexus').controller('initialInfoController', ['$scope', '$state','$http', 'Upload',	 
+	function($scope, $state, $http, Upload) {
 		
 		$scope.nextButton = false;
 		$scope.upload = function(dataUrl, name) {
@@ -16,10 +16,25 @@ angular.module('nexus').controller('initialInfoController', ['$scope', '$state',
 				 if (res.status > 0)
 				  $scope.errorMsg = res.status + ': ' + res.data;
 			});
+		};
+
+		function gotInitialInfo() {
+			return $http.get('/auth/intial')
+					.then(function(res) {
+						return res.data;
+					}, function(res) {
+						console.log(res);
+					});
 		}
 
 		$scope.next = function() {
-			$state.go('main');
-		}
+			gotInitialInfo()
+			.then(function() {
+				$state.go('main');
+			})
+			.catch(function() {
+				console.log('Error!');
+			});
+		};
 	}
 ]);

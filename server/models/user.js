@@ -10,7 +10,7 @@ var User = new userSchema({
 	},
 	gender: {type: String},
 	profilePic: {type: String, default: 'SkqEWypDx.jpg'},
-	verified: {type: Boolean}
+	verified: {type: Boolean, default: false}
 });
 
 User.plugin(passportLocalMongoose, {

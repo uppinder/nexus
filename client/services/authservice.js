@@ -6,12 +6,9 @@ angular.module('nexus').factory('authService', ['$http',
 		return {
 			isLoggedIn: isLoggedIn,
 			getUserStatus: getUserStatus,
-			register: register,
-			verifyUser: verifyUser,
 			login: login,
 			logout: logout
 		};
-
 
 		function isLoggedIn() {
 			return user;
@@ -26,35 +23,14 @@ angular.module('nexus').factory('authService', ['$http',
 				});
 		}
 
-		function register(formData) {
-
-			return $http.post('/auth/register', formData)
-				.then(function() {
-						user = true;
-					},
-					function() {
-						user = false;
-					});
-
-		}
-
-		function verifyUser(token) {
-			return $http.get('/verifyuser/' + token)
-				.then(function(res) {
-						user = res.data.verified;
-						return res;
-					}, 
-					function(res) {
-						user = false;
-						return res;
-					});
-		}
-
 		function login(formData) {
+
+			formData.mailServer += '.iitg.ernet.in';
 
 			return $http.post('/auth/login', {
 					username: formData.username,
-					password: formData.password
+					password: formData.password,
+					mailServer: formData.mailServer
 				})
 				.then(function(res) {
 					user = true;
