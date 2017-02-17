@@ -47,7 +47,7 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-var server = require('http').createServer(app);
+var server = require('https').createServer(config.ssl, app);
 var	io     = require('socket.io')(server);
 
 //Socket.io Configuration

@@ -18,6 +18,13 @@ $ mongo
 > use nexus
 ```
 
+Generate SSL Certificate:
+```
+$ openssl genrsa 2048 > ssl.pem
+$ openssl req -new ssl.pem -out csr.pem
+$ openssl x509 -req -days 365 -in csr.pem -signkey ssl.pem -out ssl.crt
+```
+
 Launching Nexus:
 ```
 $ sudo npm install --save

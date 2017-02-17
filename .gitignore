@@ -4,3 +4,6 @@ node_modules/
 # Misc
 npm-debug.log
 TODO.txt
+csr.pem
+ssl.crt
+ssl.crt

@@ -1,7 +1,7 @@
 angular.module('nexus').controller('navbarController', ['$scope','$state', 'authService', '$http', '$location', 'chatSocket',
 	function($scope, $state, authService, $http, $location, chatSocket) {
 
-		$scope.profilePic = 'http://localhost:4000/public/SkqEWypDx.jpg';
+		$scope.profilePic = 'https://localhost:4000/public/SkqEWypDx.jpg';
 		$scope.firstname = "";
 
 		if($state.current.name == 'main')
@@ -32,7 +32,7 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 		.then(function(data) {
 			// console.log(data.profilePic);
 			$scope.profilePic = $location.protocol() + '://' + location.host + '/public/' + data.profilePic;
-			// console.log(profilePic);
+			console.log(profilePic);
 			$scope.firstname = data.name.firstname;
 		})
 		.catch(function() {
