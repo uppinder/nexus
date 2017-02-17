@@ -19,7 +19,7 @@ angular.module('nexus').controller('initialInfoController', ['$scope', '$state',
 		};
 
 		function gotInitialInfo() {
-			return $http.get('/auth/intial')
+			return $http.get('/auth/initial')
 					.then(function(res) {
 						return res.data;
 					}, function(res) {

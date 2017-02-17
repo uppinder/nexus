@@ -78,7 +78,7 @@ router.get('/initial', function(req, res) {
   User.findById(req.user._id, function(err, user) {
     if(err || !user)
       res.status(500);
-
+  
     user.verified = true;
     user.save(function() {
       res.status(200).json({

@@ -16,8 +16,6 @@ angular.module('nexus').controller('loginController', ['$scope', '$state', 'auth
 				.then(function(user) {
 					$scope.loginForm = {};
 					
-					console.log(user);
-
 					if(!user.verified) {
 						$state.go('initialInfo');
 					} else {
