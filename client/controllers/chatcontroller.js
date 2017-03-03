@@ -1,5 +1,5 @@
-angular.module('nexus').controller('chatController', ['$scope', '$rootScope', 'chatroom', 'chatSocket',
-	function($scope, $rootScope, chatroom, chatSocket) {
+angular.module('nexus').controller('chatController', ['$scope', '$state', '$rootScope', 'chatroom', 'chatSocket',
+	function($scope, $state, $rootScope, chatroom, chatSocket) {
 		
 		$scope.getMessages = chatroom.getMessages;
 		
@@ -14,6 +14,10 @@ angular.module('nexus').controller('chatController', ['$scope', '$rootScope', 'c
 
 			chatroom.sendMessage(msg);
 			$scope.m = "";
+		}
+
+		$scope.viewProfile = function(id) {
+			$state.go('main.user', {id: id});
 		}
 	}
 ]);

@@ -31,6 +31,14 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         restricted: true
       }
     })
+    .state('main.user', {
+      url: '^/user/:id',
+      templateUrl: 'views/user.html',
+      controller: 'userController',
+      parmas: {
+        restricted: true
+      }
+    })
     .state('login',{
       url: '/login',
       templateUrl: 'views/auth/login.html',

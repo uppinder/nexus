@@ -1,7 +1,6 @@
 <!doctype html>
 <html>
   <head>
-    <title>Socket.IO chat</title>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
@@ -17,7 +16,7 @@
     <ul id="messages">
       <li ng-repeat="msg in getMessages()">
         <div>
-          <{{msg.date | date:"h:mm a"}}>&nbsp;{{msg.user.username}}&nbsp;:&nbsp;{{msg.body}}
+          <{{msg.date | date:"h:mm a"}}>&nbsp;<a ng-click="viewProfile(msg.user.username)">{{msg.user.username}}</a>&nbsp;:&nbsp;{{msg.body}}
         </div>
       </li>
     </ul>

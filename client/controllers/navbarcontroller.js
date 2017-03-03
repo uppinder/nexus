@@ -18,7 +18,7 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 		function getData() {
 			return $http({
 				method: 'GET',
-				url: '/user/pic',
+				url: '/user_data/pic',
 				cache: true
 			})
 			.then(function(res) {

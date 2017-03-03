@@ -55,7 +55,7 @@ require('./socket.js')(io, passport, cookieParser, config.express_session);
 
 // routes
 app.use('/auth', authRoutes);
-app.use('/user', dataRoutes);
+app.use('/user_data', dataRoutes);
 app.use('/upload', uploadRoutes);
 
 app.get('*', function(req, res) {
