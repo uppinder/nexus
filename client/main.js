@@ -35,7 +35,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '^/user/:id',
       templateUrl: 'views/user.html',
       controller: 'userController',
-      parmas: {
+      params: {
         restricted: true
       }
     })
@@ -61,7 +61,6 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     });
     
     $urlRouterProvider.otherwise('/404');
-
     $locationProvider.html5Mode(true);
 });
 

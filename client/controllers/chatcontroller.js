@@ -4,7 +4,7 @@ angular.module('nexus').controller('chatController', ['$scope', '$state', '$root
 		$scope.getMessages = chatroom.getMessages;
 		
 		$scope.$on('socket:update', function() {
-			$scope.apply();
+			$scope.$apply();
 		});
 		
 		$scope.sendMsg = function() {

@@ -30,13 +30,11 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 
 		getData()
 		.then(function(data) {
-			// console.log(data.profilePic);
 			$scope.profilePic = $location.protocol() + '://' + location.host + '/public/' + data.profilePic;
-			console.log(profilePic);
-			$scope.firstname = data.name.firstname;
+			$scope.firstname = data.name;
 		})
-		.catch(function() {
-			console.log("Error.");
+		.catch(function(err) {
+			console.log(err);
 		});
 	}
 ]);

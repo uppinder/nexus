@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
-var userSchema = mongoose.Schema;
+var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 
-var User = new userSchema({
+var userSchema = new Schema({
 	username: {type: String},
 	name: {
 		firstname: {type: String},
@@ -10,11 +10,12 @@ var User = new userSchema({
 	},
 	gender: {type: String},
 	profilePic: {type: String, default: 'SkqEWypDx.jpg'},
-	verified: {type: Boolean, default: false}
+	verified: {type: Boolean, default: false},
+	friends: [{type: Schema.Types.ObjectId, ref: 'User', unique: true}]
 });
 
-User.plugin(passportLocalMongoose, {
+userSchema.plugin(passportLocalMongoose, {
 	selectFields : 'username verified'
 });
 
-module.exports = mongoose.model('User', User);
+module.exports = mongoose.model('User', userSchema);
