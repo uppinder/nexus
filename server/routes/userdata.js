@@ -4,24 +4,25 @@ var _ = require('lodash');
 
 router.get('/user/:id', function(req, res) {
 	User.findOne({username:req.params.id}, function(err, acc) {
-		if(err) {
-			console.log(err);
+		if(err || !acc) {
+			console.log(err, acc);
 			res.status(404).json({
 				status: 'User not found!'
 			});
+			
+		} else {
+			var isFriend = false;
+			User.findById(req.user._id, function(err, self) {
+
+				if(_.find(self.friends, acc._id))
+					isFriend = true;
+
+				res.status(200).json({
+					user: acc,
+					isFriend: isFriend
+				});			
+			});
 		}
-
-		var isFriend = false;
-		User.findById(req.user._id, function(err, self) {
-
-			if(_.find(self.friends, acc._id))
-				isFriend = true;
-
-			res.status(200).json({
-				user: acc,
-				isFriend: isFriend
-			});			
-		});
 	});
 });
 

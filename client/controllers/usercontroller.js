@@ -1,5 +1,5 @@
-angular.module('nexus').controller('userController', ['$scope', '$http', '$location', '$stateParams',
-	function($scope, $http, $location, $stateParams) {
+angular.module('nexus').controller('userController', ['$scope', '$http', '$location', '$state', '$stateParams',
+	function($scope, $http, $location, $state, $stateParams) {
 
 		$scope.name = "";
 		$scope.profilePic = "";
@@ -10,7 +10,7 @@ angular.module('nexus').controller('userController', ['$scope', '$http', '$locat
 					.then(function(res) {
 						return res.data;
 					}, function(res) {
-						console.log(res);
+						return res;
 					});		
 		}
 
@@ -26,9 +26,13 @@ angular.module('nexus').controller('userController', ['$scope', '$http', '$locat
 
 		getInfo()
 		.then(function(data) {
-			$scope.name = data.user.username;
-			$scope.profilePic = $location.protocol() + '://' + location.host + '/public/' + data.user.profilePic;
-			$scope.isFriend = data.isFriend;
+			if(data.status == 404)
+				$state.go('404');
+			else {
+				$scope.name = data.user.username;
+				$scope.profilePic = $location.protocol() + '://' + location.host + '/public/' + data.user.profilePic;
+				$scope.isFriend = data.isFriend;
+			}
 		})
 		.catch(function(err) {
 			console.log(err);
@@ -37,9 +41,7 @@ angular.module('nexus').controller('userController', ['$scope', '$http', '$locat
 		$scope.addFriend = function() {
 			sendFriendReq()
 			.then(function() {
-				console.log('here');
 				$scope.isFriend = true;
-				console.log($scope.isFriend);
 			})
 			.catch(function(err) {
 				console.log(err);
