@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var chatRoomSchema = new Schema({
 	name: {type: String},
+	is_private: {type: Boolean},
 	members: [
 			{
 				user: {type: Schema.Types.ObjectId, ref: 'User', unique: true},
