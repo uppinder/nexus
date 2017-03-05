@@ -11,7 +11,8 @@ var userSchema = new Schema({
 	gender: {type: String},
 	profilePic: {type: String, default: 'SkqEWypDx.jpg'},
 	verified: {type: Boolean, default: false},
-	friends: [{type: Schema.Types.ObjectId, ref: 'User', unique: true}]
+	friends: [{type: Schema.Types.ObjectId, ref: 'User', unique: true}],
+	chatRooms: [{type:Schema.Types.ObjectId, ref: 'chatRoom'}]
 });
 
 userSchema.plugin(passportLocalMongoose, {

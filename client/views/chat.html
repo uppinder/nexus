@@ -4,24 +4,79 @@
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
-      #chatbox { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      #chatbox input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      #chatbox button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0;}
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
+      .panel-height {
+        height: 500px;
+      }
     </style>
   </head>
   <body>
-    <ul id="messages">
-      <li ng-repeat="msg in getMessages()">
-        <div>
-          <{{msg.date | date:"h:mm a"}}>&nbsp;<a ng-click="viewProfile(msg.user.username)">{{msg.user.username}}</a>&nbsp;:&nbsp;{{msg.body}}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              Chat Rooms
+            </div>
+            <div class="panel-body panel-height">
+              <ul class="media-list">
+                <li class="media">
+                  <div class="media-body">
+                    Room 1
+                  </div>                  
+                </li>
+                <li class="media">
+                  <div class="media-body">
+                    Room 2
+                  </div>                  
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </li>
-    </ul>
-    <div id="chatbox">
-      <input ng-model="m" autocomplete="off" /><button ng-click="sendMsg()" type="button">Send</button>
+        <div class="col-md-8">
+          <div class="panel panel-info">
+            <div class="panel-body panel-height" style="overflow-y: scroll">
+              <ul class="media-list">
+                <li ng-repeat="msg in getMessages()" class="media">
+                  <div class="media-body">
+                    <{{msg.date | date:"h:mm a"}}>&nbsp;<a ng-click="viewProfile(msg.user.username)">{{msg.user.username}}</a>&nbsp;:&nbsp;{{msg.body}}          
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="panel-footer">
+              <div class="input-group">
+                <input ng-model="m" type="text" class="form-control" placeholder="Enter Message" ng-keypress="($event.charCode == 13)?sendMsg():return">
+                <span class="input-group-btn">
+                  <button class="btn btn-info" type="button" ng-click="sendMsg()">Send</button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              Users
+            </div>
+            <div class="panel-body panel-height">
+              <ul class="media-list">
+                <li class="media">
+                  <div class="media-body">
+                    User 1
+                  </div>                  
+                </li>
+                <li class="media">
+                  <div class="media-body">
+                    User 2
+                  </div>                  
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </body>
+
+</body>
 </html>
