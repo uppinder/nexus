@@ -3,9 +3,7 @@ angular.module('nexus')
 		var users_online = {};
 		var messages = [];
 
-		// TODO: This event is not being recevied.
 		chatSocket.on('init', function(data) {
-			console.log('here');
 			// console.log(data);
 			$rootScope.currentUser = data.me;
 			messages = data.messages;
@@ -17,7 +15,7 @@ angular.module('nexus')
 		chatSocket.on('new_user', function(data) {
 			messages.push({
 				user: {
-					name: {firstname: 'Server'}
+					name: {username: 'Server'}
 				},
 				body: data.user.username + ' has joined.',
 				date: Date.now()
