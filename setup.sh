@@ -1,3 +1,9 @@
+# check sudo rights
+if [ $EUID -ne 0 ]; then
+	echo "Please run as root"
+	exit
+fi
+
 # importing public key and setting up source list for MongoDB
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
 echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
@@ -37,6 +43,7 @@ openssl req -new -key ssl.pem -out csr.pem
 openssl x509 -req -days 365 -in csr.pem -signkey ssl.pem -out ssl.crt
 
 #launching nexus
+npm config set strict-ssl false
 sudo npm install --save
 sudo npm install -g nodemon
 nodemon server.js
