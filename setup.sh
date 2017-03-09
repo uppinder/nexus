@@ -9,7 +9,7 @@ sudo apt-get update
 sudo apt-get install -y mongodb-org nodejs npm
 sudo service mongod restart
 
-# Promt for username and password for mongodb
+# Prompt for username and password for mongodb
 
 # mongo -u username -p password admin --eval "db.getSiblingDB('nexus').addUser('new_user', 'new_password');"
 

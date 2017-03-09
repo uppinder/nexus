@@ -1,6 +1,8 @@
 var app = angular.module('nexus', [
   'ui.router', 
-  'ui.bootstrap', 
+  'ui.bootstrap',
+  'ngAnimate',
+  'ngSanitize', 
   'btford.socket-io',
   'ngFileUpload', 
   'ngImgCrop'
@@ -25,8 +27,16 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.chat', {
       url: '^/chat',
-      templateUrl: 'views/chat.html',
+      templateUrl: 'views/chat/chat.html',
       controller: 'chatController',
+      params: {
+        restricted: true
+      }
+    })
+    .state('main.chat.room', {
+      url: '^/room/:roomId',
+      templateUrl: 'views/chat/chatroom.html',
+      controller: 'chatRoomController',
       params: {
         restricted: true
       }

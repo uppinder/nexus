@@ -1,19 +1,19 @@
 {
   "_args": [
     [
-      "angular",
+      "angular-animate",
       "/home/uppinder/Downloads/myprojects/nexus"
     ]
   ],
-  "_from": "angular@latest",
-  "_id": "angular@1.6.2",
+  "_from": "angular-animate@latest",
+  "_id": "angular-animate@1.6.2",
   "_inCache": true,
   "_installable": true,
-  "_location": "/angular",
+  "_location": "/angular-animate",
   "_nodeVersion": "6.9.5",
   "_npmOperationalInternal": {
     "host": "packages-18-east.internal.npmjs.com",
-    "tmp": "tmp/angular-1.6.2.tgz_1486475964759_0.46831068070605397"
+    "tmp": "tmp/angular-animate-1.6.2.tgz_1486475975354_0.3915575372520834"
   },
   "_npmUser": {
     "email": "angular-core+npm@google.com",
@@ -22,8 +22,8 @@
   "_npmVersion": "3.10.10",
   "_phantomChildren": {},
   "_requested": {
-    "name": "angular",
-    "raw": "angular",
+    "name": "angular-animate",
+    "raw": "angular-animate",
     "rawSpec": "",
     "scope": null,
     "spec": "latest",
@@ -32,10 +32,10 @@
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "https://registry.npmjs.org/angular/-/angular-1.6.2.tgz",
-  "_shasum": "d0b677242ac4bf9ae81424297c6320973af4bb5a",
+  "_resolved": "https://registry.npmjs.org/angular-animate/-/angular-animate-1.6.2.tgz",
+  "_shasum": "def2a8b9ede53b4b6e234c25f5c64e4b4385df15",
   "_shrinkwrap": null,
-  "_spec": "angular",
+  "_spec": "angular-animate",
   "_where": "/home/uppinder/Downloads/myprojects/nexus",
   "author": {
     "email": "angular-core+npm@google.com",
@@ -45,17 +45,27 @@
     "url": "https://github.com/angular/angular.js/issues"
   },
   "dependencies": {},
-  "description": "HTML enhanced for web apps",
+  "description": "AngularJS module for animations",
   "devDependencies": {},
   "directories": {},
   "dist": {
-    "shasum": "d0b677242ac4bf9ae81424297c6320973af4bb5a",
-    "tarball": "https://registry.npmjs.org/angular/-/angular-1.6.2.tgz"
+    "shasum": "def2a8b9ede53b4b6e234c25f5c64e4b4385df15",
+    "tarball": "https://registry.npmjs.org/angular-animate/-/angular-animate-1.6.2.tgz"
   },
-  "gitHead": "6588975381655e657da44fb3a573dbf48c3075d5",
+  "gitHead": "bd4e1fb3b6ac4f20adca0ba6d4fbf91359836a97",
   "homepage": "http://angularjs.org",
+  "jspm": {
+    "shim": {
+      "angular-animate": {
+        "deps": [
+          "angular"
+        ]
+      }
+    }
+  },
   "keywords": [
     "angular",
+    "animation",
     "browser",
     "client-side",
     "framework"
@@ -63,6 +73,10 @@
   "license": "MIT",
   "main": "index.js",
   "maintainers": [
+    {
+      "name": "akalinovski",
+      "email": "a.kalinovski@gmail.com"
+    },
     {
       "name": "angularcore",
       "email": "angular-core+npm@google.com"
@@ -72,7 +86,7 @@
       "email": "pete@bacondarwin.com"
     }
   ],
-  "name": "angular",
+  "name": "angular-animate",
   "optionalDependencies": {},
   "readme": "ERROR: No README data found!",
   "repository": {

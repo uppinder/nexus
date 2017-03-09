@@ -15,6 +15,18 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 				});
 		}
 
+		$scope.searchUsers = function(val) {
+			return $http.get('/search/all', {params: {key:val}})
+					.then(function(res) {
+						return res.data.result;
+						// console.log(res.data.result[0]);
+					});
+		}
+
+		$scope.onSearchSelect = function($item) {
+			$state.go('main.user', {id:$item.username});
+		}
+
 		function getData() {
 			return $http({
 				method: 'GET',
@@ -36,6 +48,6 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 		.catch(function(err) {
 			console.log(err);
 		});
+
 	}
 ]);
-	

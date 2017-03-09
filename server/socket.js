@@ -18,12 +18,21 @@ module.exports = function(io, passport, cookieParser, expressConfig) {
 		var user = socket.request.user;
 		// console.log(socket.adapter);
 		// console.log(user);
-		console.log(io.engine.clientsCount);
+		// console.log(socket.rooms);
 		
 		chatCtrl.initUser(socket, user);
 
-		socket.on('message', function(msg) {
-			chatCtrl.sendMessage(io, user , msg);
+		socket.on('message', function(data) {
+			chatCtrl.sendMessage(io, user , data.body, data.room);
+		});
+
+		socket.on('create_room', function(room) {
+			console.log(room);
+			chatCtrl.createRoom(socket, user, room.name, room.is_private);
+		});
+
+		socket.on('new_users', function(data) {
+			chatCtrl.addUsers(io, data.users, data.room);
 		});
 
 		socket.on('disconnect', function() {
