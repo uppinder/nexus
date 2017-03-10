@@ -2,7 +2,8 @@ var app = angular.module('nexus', [
   'ui.router', 
   'ui.bootstrap',
   'ngAnimate',
-  'ngSanitize', 
+  'ngSanitize',
+  'angular-nicescroll',
   'btford.socket-io',
   'ngFileUpload', 
   'ngImgCrop'
@@ -14,13 +15,6 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('main', {
       url: '/',
       templateUrl: 'views/main.html',
-      params: {
-        restricted: true
-      }
-    })
-    .state('main.home', {
-      url: '^/home',
-      template: '<h1>Home sweet home</h1>',
       params: {
         restricted: true
       }

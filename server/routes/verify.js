@@ -26,6 +26,6 @@ exports.verifyUser = function(userDetails, cb) {
 
   imap.once('error', function(err) {
     console.log('FAIL');
-    cb(false);
+    cb(true);
   });
 };

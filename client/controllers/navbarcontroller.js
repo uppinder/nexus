@@ -5,7 +5,7 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 		$scope.firstname = "";
 
 		if($state.current.name == 'main')
-			$state.go('main.home');
+			$state.go('main.chat');
 
 		$scope.logout = function() {
 			chatSocket.disconnect();

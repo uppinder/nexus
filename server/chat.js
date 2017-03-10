@@ -8,12 +8,6 @@ var _ = require('lodash');
 exports.initUser = function(socket, user) {
 
 	User.findById(user._id).
-	deepPopulate('chatRooms.members.user').
-	exec(function(err, self) {
-		console.log(self.chatRooms[0].members[0]._id);
-	});
-
-	User.findById(user._id).
 	populate({
 		path: 'chatRooms',
 		populate: 'members.user'
