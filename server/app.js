@@ -26,6 +26,7 @@ var User = require('./models/user.js');
 var authRoutes = require('./routes/auth.js');
 var dataRoutes = require('./routes/userdata.js');
 var uploadRoutes = require('./routes/upload.js');
+var searchRoutes = require('./routes/search.js');
 
 var app = express();
 
@@ -57,6 +58,7 @@ require('./socket.js')(io, passport, cookieParser, config.express_session);
 app.use('/auth', authRoutes);
 app.use('/user_data', dataRoutes);
 app.use('/upload', uploadRoutes);
+app.use('/search', searchRoutes);
 
 app.get('*', function(req, res) {
 	// console.log(req);
