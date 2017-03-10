@@ -7,7 +7,7 @@ if [ $EUID -ne 0 ]; then
 fi
 
 # check net connectivity
-wget -q --tries=10 --timeout=20 --spider http://google.com
+wget -q --tries=10 --timeout=10 --spider http://google.com
 
 if [[ $? -eq 0 ]]; then
 	echo "Net connection successful."
@@ -21,11 +21,20 @@ set -e
 # Any subsequent(*) commands which fail will cause the shell script to exit immediately
 
 # importing public key and setting up source list for MongoDB
-sudo -E apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+# sudo -E apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
 echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 
 # installing NodeJS and mongo DB
-sudo apt-get update && sudo apt-get install -y nodejs npm mongodb-org
+sudo apt-get update
+if [[ $? -ne 0 ]]; then
+	echo
+	echo
+	echo "ERROR : apt not configured."
+	echo "configure proxy in /etc/apt/apt.conf"
+	echo
+	exit
+fi
+sudo apt-get install -y nodejs npm mongodb-org
 
 echo
 echo	
@@ -105,6 +114,6 @@ echo
 echo
 echo
 echo "Use the following command to run the server."
-echo -e "\e[33m 'sudo nodemon server.js' \e[0m"
+echo -e "\e[33m  'sudo nodemon server.js' \e[0m"
 echo
-echo -e "Then open \e[33mhttps://localhost:4000/\e[0m in your browser"
+echo -e "Then open  \e[33mhttps://localhost:4000/\e[0m  in your browser"
