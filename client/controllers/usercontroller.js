@@ -11,14 +11,14 @@ angular.module('nexus').controller('userController', ['$scope', '$http', '$locat
 						return res.data;
 					}, function(res) {
 						return res;
-					});		
+					});
 		}
 
 		function sendFriendReq() {
 			return $http.post('/user_data/add', {
 					username: $stateParams.id
 				})
-				.then(function() {					
+				.then(function() {
 				}, function(err) {
 					console.log(err);
 				});

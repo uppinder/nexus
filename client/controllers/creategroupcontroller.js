@@ -15,7 +15,7 @@ angular.module('nexus').controller('createGroupController', ['$scope', '$state',
             })
                 .then(function(res) {
                     console.log(res);
-                    if(res.error){
+                    if(res.data.error){
                         console.log("IMPOSSIBLE ERROR");
                         $scope.error = true;
                         $scope.errorMessage = "Something went wrong!";
