@@ -5,13 +5,14 @@ var passport = require('passport');
 var verify = require('./verify.js');
 var User = require('../models/user.js');
 
+// post request to /auth/login
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) {
       return next(err);
     }
   
-    if (!user) {
+    if (!user) { // user not registered already, then sign him up
 
       var userDetails = {
         username: req.body.username,
@@ -19,6 +20,7 @@ router.post('/login', function(req, res, next) {
         mailServer: req.body.mailServer
       };
 
+      // connect to corresponding mail server and login the user
       verify.verifyUser(userDetails, function(status) {
         
         if(status) {
@@ -50,14 +52,14 @@ router.post('/login', function(req, res, next) {
 
           });
 
-        } else {
+        } else { // if user doesn't exist OR user not verified by the mail servers
           return res.status(401).json({
             err:info
           });
         }
       });
 
-    } else {
+    } else {// user has already registered, so simple log in 
 
       req.logIn(user, function(err) {
         if (err) {

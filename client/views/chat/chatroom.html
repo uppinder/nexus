@@ -4,7 +4,11 @@
       <ul class="media-list">
         <li ng-repeat="msg in getMessages()" class="media">
           <div class="media-body">
-            <{{msg.meta.sent_time | date:"h:mm a"}}>&nbsp;<!-- <a ng-click="viewProfile(msg.meta.sender.username)">{{msg.meta.sender.username}}</a>&nbsp;:&nbsp; --><div ng-bind-html="msg.text"></div>          
+          <div class="row">
+            {{msg.meta.sender.username}} :
+            <div align="right" style="padding-right: 30px">{{msg.meta.sent_time | date:"h:mm a"}}</div>
+          </div>
+          <div ng-bind-html="msg.text" style="padding-left: 30px"></div>          
           </div>
         </li>
       </ul>

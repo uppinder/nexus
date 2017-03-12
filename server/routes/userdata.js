@@ -1,5 +1,6 @@
 var router = require('express').Router();
 var User = require('../models/user.js');
+var Event = require('../models/event.js')
 var _ = require('lodash');
 
 router.get('/user/:id', function(req, res) {
@@ -62,6 +63,37 @@ router.get('/pic', function(req, res) {
 		};
 
 		res.status(200).json(payload);
+	});
+});
+
+// for getting the events of the user
+router.get('/events',function(req,res) {
+	User.findById(req.user._id)
+		.populate('events').exec(function(err, acc) {
+			if(err) {
+				console.log(err);
+				return res.status(400).send('Invalid user.');
+			}
+			return res.status(200).json(acc.events);
+		});
+});
+
+
+// to add new event
+router.post('/addevent',function(req, res) {
+	console.log(req.body.event);
+	User.findById(req.user._id, function(err, acc) {
+		if(err) {
+			console.log(err);
+			return res.status(400).send('Invalid user.');
+		}
+		var event = new Event(req.body.event);
+		event.save(function() {
+			acc.events.addToSet(event);
+			acc.save(function() {
+				console.log("added successfully");
+			});
+		});
 	});
 });
 
