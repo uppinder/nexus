@@ -1,0 +1,14 @@
+<h1>Create a new group</h1>
+<div ng-show="error">{{errorMessage}}</div>
+<form ng-submit="createNew()">
+    <p>
+        <label>Group Name</label>
+        <input type="text" name="groupName" ng-model="groupName" required>
+    </p>
+    <p>
+        <label>Description:</label>
+        <input type="text" name="groupDescription" ng-model="groupDescription" required>
+    </p>
+
+    <button type="submit">Create!</button>
+</form>
