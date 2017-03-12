@@ -74,6 +74,7 @@ router.get('/events',function(req,res) {
 				console.log(err);
 				return res.status(400).send('Invalid user.');
 			}
+			console.log(acc.events);
 			return res.status(200).json(acc.events);
 		});
 });
@@ -88,10 +89,13 @@ router.post('/addevent',function(req, res) {
 			return res.status(400).send('Invalid user.');
 		}
 		var event = new Event(req.body.event);
+		console.log(event);
 		event.save(function() {
-			acc.events.addToSet(event);
-			acc.save(function() {
+			acc.events.addToSet(event._id);
+			acc.save(function(err) {
+				console.log(err);
 				console.log("added successfully");
+				return res.status(200);
 			});
 		});
 	});

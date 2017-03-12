@@ -5,8 +5,8 @@ var Schema = mongoose.Schema;
 var eventSchema = new Schema({
 	title: {type: String},
 	color: {type: String},
-	startsAt: {type: Date},
-	endsAt: {type: Date},
+	startsAt: {type: Date, default: Date.now},
+	endsAt: {type: Date, default: Date.now},
 	draggable: {type: Boolean, default: true},
 	resizable: {type: Boolean, default: true}
 });

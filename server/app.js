@@ -22,6 +22,8 @@ mongoose.connection.on('connected', function(){
 
 // Users model/schema
 var User = require('./models/user.js');
+// events model schema 
+// var Event = require('./models/event.js')
 
 //routes
 var authRoutes = require('./routes/auth.js');

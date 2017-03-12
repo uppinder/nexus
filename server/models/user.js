@@ -13,8 +13,8 @@ var userSchema = new Schema({
 	profilePic: {type: String, default: 'SkqEWypDx.jpg'},
 	verified: {type: Boolean, default: false},
 	friends: [{type: Schema.Types.ObjectId, ref: 'User'}],
-	chatRooms: [{type:Schema.Types.ObjectId, ref: 'Chatroom'}],
-	events: [{type:Schema.Types.ObjectId, ref: 'event'}],
+	chatRooms: [{type: Schema.Types.ObjectId, ref: 'Chatroom'}],
+	events: [{type:Schema.Types.ObjectId, ref: 'Event'}],
 });
 
 userSchema.plugin(passportLocalMongoose, {
