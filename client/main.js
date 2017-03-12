@@ -53,7 +53,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.createGroup', {
         url: '^/createGroup',
-        templateUrl: 'views/createGroup.html',
+        templateUrl: 'views/creategroup.html',
         controller: 'createGroupController',
         params: {
             restricted: true

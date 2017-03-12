@@ -9,7 +9,7 @@ var groupSchema = new Schema({
     description: {type: String},
     members: [
         {
-            user: {type: Schema.Types.ObjectId, ref: 'User', unique: true},
+            user: {type: Schema.Types.ObjectId, ref: 'User'},
             role: {type: String, default: 'member'}
         }
     ],
