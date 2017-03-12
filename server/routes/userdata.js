@@ -69,33 +69,38 @@ router.get('/pic', function(req, res) {
 // for getting the events of the user
 router.get('/events',function(req,res) {
 	User.findById(req.user._id)
-		.populate('events').exec(function(err, acc) {
+		.populate('event').exec(function(err, acc) {
 			if(err) {
-				console.log(err);
+				// console.log(err);
 				return res.status(400).send('Invalid user.');
 			}
-			console.log(acc.events);
-			return res.status(200).json(acc.events);
+			// console.log(acc);
+			return res.status(200).json(acc.event);
 		});
 });
 
 
 // to add new event
 router.post('/addevent',function(req, res) {
-	console.log(req.body.event);
+	// console.log(req.body.event);
 	User.findById(req.user._id, function(err, acc) {
 		if(err) {
-			console.log(err);
+			// console.log(err);
 			return res.status(400).send('Invalid user.');
 		}
 		var event = new Event(req.body.event);
-		console.log(event);
-		event.save(function() {
-			acc.events.addToSet(event._id);
+		// event.title = req.body.event.title;
+		// event.startsAt = req.body.event.startsAt;
+		// event.endsAt = req.body.event.endsAt;
+		// event.color = req.body.event.color;
+		event.save(function(err) {
+			if (err) {console.log(err);}
+			// console.log(event);
+			acc.event.addToSet(event._id);
 			acc.save(function(err) {
 				console.log(err);
-				console.log("added successfully");
-				return res.status(200);
+				// console.log("added successfully");
+				return res.status(200).send();
 			});
 		});
 	});

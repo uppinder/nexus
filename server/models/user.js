@@ -14,7 +14,7 @@ var userSchema = new Schema({
 	verified: {type: Boolean, default: false},
 	friends: [{type: Schema.Types.ObjectId, ref: 'User'}],
 	chatRooms: [{type: Schema.Types.ObjectId, ref: 'Chatroom'}],
-	events: [{type:Schema.Types.ObjectId, ref: 'Event'}],
+	event: [{type:Schema.Types.ObjectId, ref: 'event'}],
 });
 
 userSchema.plugin(passportLocalMongoose, {
