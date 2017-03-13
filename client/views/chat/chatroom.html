@@ -1,56 +1,63 @@
 <div class="col-md-8 custom">
-  <div class="panel panel-info" style="margin:0; height: 100%;">
-    <div class="panel-body panel-height" ng-nicescroll nice-scroll-top-end="topEndComplete()" nice-scroll-end="endScroll()" style="overflow-y: scroll; height:90%">
-      <ul class="media-list">
-        <li ng-repeat="msg in getMessages()" class="media">
-          <div class="media-body">
-            <{{msg.meta.sent_time | date:"h:mm a"}}>&nbsp;<!-- <a ng-click="viewProfile(msg.meta.sender.username)">{{msg.meta.sender.username}}</a>&nbsp;:&nbsp; --><div ng-bind-html="msg.text"></div>          
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="panel-footer">
-      <div class="input-group">
+    <div class="panel panel-info" style="margin:0; height: 100%;">
+        <div class="panel-body panel-height" ng-nicescroll nice-scroll-top-end="topEndComplete()"
+             nice-scroll-end="endScroll()" style="overflow-y: scroll; height:90%">
+            <ul class="media-list">
+                <li ng-repeat="msg in getMessages()" class="media">
+                    <div class="media-body">
+                        <{{msg.meta.sent_time | date:"h:mm a"}}>&nbsp;
+                        <!-- <a ng-click="viewProfile(msg.meta.sender.username)">{{msg.meta.sender.username}}</a>&nbsp;:&nbsp; -->
+                        <div ng-bind-html="msg.text"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="panel-footer">
+            <div class="input-group">
         <span class="input-group-btn">
         <button type="button" class="btn btn-default" ngf-select="upload($file)">
           <span class="glyphicon glyphicon-file"></span>
         </button>
-        </span>  
-        <input ng-model="m" type="text" class="form-control" placeholder="Enter Message" ng-keypress="($event.charCode == 13)?sendMsg(m):return" autofocus>
-        <span class="input-group-btn">
+        </span>
+                <input ng-model="m" type="text" class="form-control" placeholder="Enter Message"
+                       ng-keypress="($event.charCode == 13)?sendMsg(m):return" autofocus>
+                <span class="input-group-btn">
           <button class="btn btn-info" type="button" ng-click="sendMsg(m)">Send</button>
         </span>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="custom" style="float: left; position: relative;">
-  <div class="panel panel-primary" style="margin:0;height: 100%;">
-    <div class="panel-heading" style="text-align: center;"><span style="font-size: 20px">Users</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-success" ng-click="addPeople()">Add</button></div>
-    <div class="panel-body panel-height" style="overflow-y: scroll; height: 90%">
-      <ul class="media-list">
-        <li></li>
-      </ul>
+    <div class="panel panel-primary" style="margin:0;height: 100%;">
+        <div class="panel-heading" style="text-align: center;"><span style="font-size: 20px">Users</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-success" ng-click="addPeople()">Add</button>
+        </div>
+        <div class="panel-body panel-height" style="overflow-y: scroll; height: 90%">
+            <ul class="media-list">
+                <li></li>
+            </ul>
+        </div>
     </div>
-  </div>
 </div>
 
 <script type="text/ng-template" id="addPeopleModal.html">
-  <div class="modal-header">
-      <h3 class="modal-title" id="modal-title">Add People</h3>
-  </div>
-  <div class="modal-body" id="modal-body">
-    Search for people: &nbsp;
-      <div class="form-group">
-      <input type="text" class="form-control" placeholder="Search Friends" ng-model="searchResult" uib-typeahead="user.username for user in searchFriends($viewValue)"
-        typeahead-on-select="onSearchSelect($item)">
-      </div>
-    <ul>
-      <li ng-repeat="(id,p) in persons">{{p.username}}</li>
-    </ul>
-  </div>
-  <div class="modal-footer">
-      <button class="btn btn-primary" type="button" ng-click="ok()">Ok</button>
-      <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-  </div>
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Add People</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        Search for people: &nbsp;
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search Friends" ng-model="searchResult"
+                   uib-typeahead="user.username for user in searchFriends($viewValue)"
+                   typeahead-on-select="onSearchSelect($item)">
+        </div>
+        <ul>
+            <li ng-repeat="(id,p) in persons">{{p.username}}</li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">Ok</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
 </script>
