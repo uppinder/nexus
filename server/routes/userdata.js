@@ -66,42 +66,71 @@ router.get('/pic', function(req, res) {
 	});
 });
 
-// for getting the events of the user
+// for getting the saved events of the user
 router.get('/events',function(req,res) {
 	User.findById(req.user._id)
 		.populate('event').exec(function(err, acc) {
 			if(err) {
-				// console.log(err);
+				console.log(err);
 				return res.status(400).send('Invalid user.');
 			}
-			// console.log(acc);
 			return res.status(200).json(acc.event);
 		});
 });
 
 
 // to add new event
-router.post('/addevent',function(req, res) {
-	// console.log(req.body.event);
+router.post('/events/add',function(req, res) {
 	User.findById(req.user._id, function(err, acc) {
 		if(err) {
-			// console.log(err);
+			console.log(err);
 			return res.status(400).send('Invalid user.');
 		}
-		var event = new Event(req.body.event);
-		// event.title = req.body.event.title;
-		// event.startsAt = req.body.event.startsAt;
-		// event.endsAt = req.body.event.endsAt;
-		// event.color = req.body.event.color;
-		event.save(function(err) {
-			if (err) {console.log(err);}
-			// console.log(event);
-			acc.event.addToSet(event._id);
-			acc.save(function(err) {
-				console.log(err);
-				// console.log("added successfully");
-				return res.status(200).send();
-			});
+		if (acc) {
+			var event = new Event(req.body.event);
+			event.save(function(err) {
+				if (err) {console.log(err);}
+				acc.event.addToSet(event._id);
+				acc.save(function(err) {
+					console.log(err);
+					return res.status(200).send();
+				});
+			});	
+		} else {
+			console.log("User not found : " + req.user._id);
+		}
+	});
+});
+
+// to delete event
+router.delete('/events/delete/:eventId', function(req,res) {
+	Event.findByIdAndRemove( req.params.eventId, function(err, event) {
+		if (err) {
+			console.log(err);
+			return res.status(400).send()
+		}
+		console.log("Deleted event :- " + event);
+	});
+	res.status(200).send();
+});
+
+// to update event
+router.put('/events/update/:eventId', function(req,res) {
+	Event.findById(req.params.eventId, function(err, event) {
+		if(err) {
+			console.log(err);
+			return res.status(500).send()
+		}
+		console.log(event);
+		updatedEvent = new Event(req.body.updatedEvent);
+		console.log(updatedEvent);
+		event.title = updatedEvent.title;
+		event.color.primary = updatedEvent.color.primary;
+		event.color.secondary = updatedEvent.color.secondary;
+		event.startsAt = updatedEvent.startsAt;
+		event.endsAt = updatedEvent.endsAt;
+		event.save(function(){
+			return res.status(200).send();
 		});
 	});
 });
