@@ -28,6 +28,7 @@ var dataRoutes = require('./routes/userdata.js');
 var uploadRoutes = require('./routes/upload.js');
 var searchRoutes = require('./routes/search.js');
 var downloadRoutes = require('./routes/download.js');
+var complaintRoutes = require('./routes/complaint.js');
 
 var app = express();
 
@@ -61,6 +62,7 @@ app.use('/user_data', dataRoutes);
 app.use('/upload', uploadRoutes);
 app.use('/search', searchRoutes);
 app.use('/d', downloadRoutes);
+app.use('/complaint', complaintRoutes);
 
 app.get('*', function(req, res) {
 	// console.log(req);
