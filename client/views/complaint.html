@@ -33,7 +33,7 @@
             <div>
                 <ul>
                     <li><p>{{complaint.body}}</p>
-                        <p ng-show="{{complaint.file}}"><a href="{{complaint.file}}">Uploaded screenshot{{complaint.file}}</a></p>
+                        <p ng-show="complaint.file"><a target="_blank" href={{complaint.file}}>Uploaded screenshot</a></p>
                     </li>
                 </ul>
             </div>
