@@ -2,13 +2,14 @@ angular.module('nexus')
 	.factory('chatroom', function(chatSocket, $rootScope) {
 		
 		var rooms = {};
+		var users = {};
 		// var users_online = {};
 
 		chatSocket.on('init', function(data) {
 			// console.log(data);
 			$rootScope.currentUser = data.me;
 			rooms = _.keyBy(data.rooms, o => o.room_id);
-			// console.log(rooms);
+			console.log(rooms);
 			chatSocket.forward('update');
 		});
 

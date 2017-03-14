@@ -29,7 +29,8 @@
     <div class="panel-heading" style="text-align: center;"><span style="font-size: 20px">Users</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-success" ng-click="addPeople()">Add</button></div>
     <div class="panel-body panel-height" style="overflow-y: scroll; height: 90%">
       <ul class="media-list">
-        <li></li>
+        {{ persons }}
+        <li ng-repeat="member in persons"></li>
       </ul>
     </div>
   </div>

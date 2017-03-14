@@ -13,6 +13,7 @@ var chatRoomSchema = new Schema({
 				role: {type: String, default: 'member'}
 			}
 		],
+	// messages of the chat room
 	messages: [
 			{
 				text: {type: String},

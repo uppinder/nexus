@@ -67,7 +67,7 @@ angular.module('nexus').controller('chatRoomController', ['$rootScope', '$scope'
 angular.module('nexus').controller('addPeopleModalCtrl', function($scope, $http, $uibModalInstance) {
 
 	$scope.persons = {};
-
+	console.log($scope.persons);
 	$scope.searchFriends = function(val) {
 		return $http.get('/search/friends', {params: {key:val}})
 				.then(function(res) {
