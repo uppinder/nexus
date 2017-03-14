@@ -10,7 +10,7 @@ exports.initUser = function(socket, user) {
 	User.findById(user._id).
 	populate({
 		path: 'chatRooms',
-		populate: 'members.user'
+		populate: {path: 'members.user messages.meta.sender'}
 	})
 	.exec(function(err, self) {
 		if(!err && self) {
