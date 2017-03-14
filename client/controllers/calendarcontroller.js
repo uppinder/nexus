@@ -46,7 +46,9 @@ angular.module('nexus').controller('calendarController', [ '$scope', '$http', 'm
 
 	$scope.addEvent = function() {
 		var event = {
-			title: 'New Event Title',
+			title: 'New Event',
+			venue: '',
+			description: '',
 			startsAt: moment().startOf('day').add(8, 'hours').toDate(),
 			endsAt: moment().startOf('day').add(10, 'hours').toDate(),
 			color: calendarConfig.colorTypes.important,

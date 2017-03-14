@@ -30,26 +30,29 @@
     <thead>
       <tr>
         <th>Title</th>
-        <th>Primary color</th>
-        <th>Secondary color</th>
-        <th>Starts at</th>
-        <th>Ends at</th>
-        <th>Update/Remove</th>
+        <th>Venue</th>
+        <th>Color</th>
+        <th>Starting Time</th>
+        <th>Ending Time</th>
+        <th>Description</th>
+        <th>Options</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="event in events track by $index">
         <td>
-          <input type="text" class="form-control" ng-model="event.title">
+          <input type="text" class="form-control" ng-model="event.title" placeholder="Event Title">
         </td>
         <td>
-          <input class="form-control" colorpicker type="color" ng-model="event.color.primary">
+          <input type="text" class="form-control" ng-model="event.venue" placeholder="Venue">
         </td>
         <td>
-          <input class="form-control" colorpicker type="color" ng-model="event.color.secondary">
+          <label>Primary</label><input class="form-control" colorpicker type="color" ng-model="event.color.primary">
+          <br>
+          <label>Secondary</label><input class="form-control" colorpicker type="color" ng-model="event.color.secondary">
         </td>
         <td>
-          <p class="input-group" style="max-width: 250px">
+          <p class="input-group" style="width: 100%;max-width: 250px">
             <input type="text" class="form-control" uib-datepicker-popup="dd MMMM yyyy" ng-model="event.startsAt" readonly is-open="event.startOpen" close-text="Close" >
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="toggle($event, 'startOpen', event)">
@@ -60,7 +63,7 @@
           <div uib-timepicker ng-model="event.startsAt" hour-step="1" minute-step="15" show-meridian="true"></div>
         </td>
         <td>
-          <p class="input-group" style="max-width: 250px">
+          <p class="input-group" style="width: 100%;max-width: 250px">
             <input type="text" class="form-control" readonly uib-datepicker-popup="dd MMMM yyyy" ng-model="event.endsAt" is-open="event.endOpen" close-text="Close">
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="toggle($event, 'endOpen', event)">
@@ -72,8 +75,12 @@
           </div>
         </td>
         <td>
-          <button style="flex : inline;" class="btn btn-danger" ng-click="eventDelete(event._id, $index)">Delete</button>
+          <input type="text" class="form-control" ng-model="event.description" placeholder="Description">
+        </td>
+        <td>
           <button class="btn btn-info" ng-click="eventUpdate(event)">Update</button>
+          <br><br>
+          <button style="width: 100%;" class="btn btn-danger" ng-click="eventDelete(event._id, $index)">Delete</button>
         </td>
       </tr>
     </tbody>

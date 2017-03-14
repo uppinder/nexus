@@ -116,23 +116,24 @@ router.delete('/events/delete/:eventId', function(req,res) {
 
 // to update event
 router.put('/events/update/:eventId', function(req,res) {
-	Event.findById(req.params.eventId, function(err, event) {
-		if(err) {
-			console.log(err);
-			return res.status(500).send()
-		}
-		console.log(event);
-		updatedEvent = new Event(req.body.updatedEvent);
-		console.log(updatedEvent);
-		event.title = updatedEvent.title;
-		event.color.primary = updatedEvent.color.primary;
-		event.color.secondary = updatedEvent.color.secondary;
-		event.startsAt = updatedEvent.startsAt;
-		event.endsAt = updatedEvent.endsAt;
-		event.save(function(){
-			return res.status(200).send();
+	updatedEvent = new Event(req.body.updatedEvent);
+	// console.log(updatedEvent);
+	Event.update({_id: req.params.eventId},
+		{$set: {
+			title: updatedEvent.title,
+			venue: updatedEvent.venue,
+			color: updatedEvent.color,
+			startsAt: updatedEvent.startsAt,
+			endsAt: updatedEvent.endsAt,
+			description: updatedEvent.description
+		}}, function(err) {
+			if(err) {
+				console.log(err);
+				return res.status(500).send()
+			} else {
+				return res.status(200).send();
+			}
 		});
-	});
 });
 
 module.exports = router;
