@@ -78,13 +78,15 @@ router.post('/login', function(req, res, next) {
 
 router.get('/initial', function(req, res) {
   User.findById(req.user._id, function(err, user) {
-    if(err || !user)
-      res.status(500);
+    if(err || !user){
+      res.status(500).json({
+        status:'User not verified!'
+      });
+    }
   
     user.verified = true;
     user.save(function() {
       res.status(200).json({
-        status:'Verification done!'
       });
     });
 
@@ -109,4 +111,22 @@ router.get('/status', function(req, res) {
   });
 });
 
+// setting the details of the user
+router.post('/new', function(req,res) {
+  User.findById(req.user._id, function(err, user) {
+    if(err || !user) {
+      res.status(500).json({
+        status:'User not registered!'
+      });
+    }
+    user.name.firstname = req.body.firstname;
+    user.name.lastname = req.body.lastname;
+    user.name.gender = req.body.gender;
+    user.save(function() {
+      res.status(200).json({
+        status: "successful"
+      });
+    });
+  });
+});
 module.exports = router;

@@ -1,3 +1,39 @@
+<style type="text/css">
+  .talk-bubble {
+    margin: 40px;
+    display: inline-block;
+    position: relative;
+    width: 200px;
+    height: auto;
+    background-color: lightyellow;
+  }
+  /* Right triangle placed top left flush. */
+  .tri-right.border.left-top:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -40px;
+    right: auto;
+    top: -8px;
+    bottom: auto;
+    border: 32px solid;
+    border-color: #666 transparent transparent transparent;
+  }
+  .tri-right.left-top:after{
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -20px;
+    right: auto;
+    top: 0px;
+    bottom: auto;
+    border: 22px solid;
+    border-color: lightyellow transparent transparent transparent;
+  }
+</style>
+
 <div class="col-md-8 custom">
   <div class="panel panel-info" style="margin:0; height: 100%;">
     <div class="panel-body panel-height" ng-nicescroll nice-scroll-top-end="topEndComplete()" nice-scroll-end="endScroll()" style="overflow-y: scroll; height:90%">
@@ -5,10 +41,12 @@
         <li ng-repeat="msg in getMessages()" class="media">
           <div class="media-body">
           <div class="row">
-            {{msg.meta.sender.username}} :
-            <div align="right" style="padding-right: 30px">{{msg.meta.sent_time | date:"h:mm a"}}</div>
-          </div>
-          <div ng-bind-html="msg.text" style="padding-left: 30px"></div>         
+            <div style="display: table-cell;float:left;padding-left: 30px">{{msg.meta.sender.name.firstname}} {{msg.meta.sender.name.lastname}}</div><div style="display: table-cell;float:right;padding-right: 50px">{{msg.meta.sent_time | date:"h:mm a"}}</div>
+            <div class="talk-bubble tri-right left-top">
+              <div class="talktext">
+                <p style="padding-left: 50px" ng-bind-html="msg.text"></p>
+              </div>
+            </div>
           </div>
         </li>
       </ul>

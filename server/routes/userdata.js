@@ -59,7 +59,8 @@ router.get('/pic', function(req, res) {
 
 		var payload = {
 			profilePic: acc.profilePic,
-			name: acc.username
+			name: acc.name,
+			username: acc.username
 		};
 
 		res.status(200).json(payload);

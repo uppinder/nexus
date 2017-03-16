@@ -7,7 +7,7 @@
     }
   </style>
 <form name="profilePicUpload">
-	<h1>Upload Profile Pic:</h1>
+	<h3>Upload Profile Pic:</h3>
 	<button ngf-select ng-model="picFile" accept="image/*">Select Picture</button>
 	<div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
 		<img-crop image="picFile | ngfDataUrl"
@@ -17,10 +17,15 @@
 	<div>
 		<img ng-src="{{croppedDataUrl}}">
 	</div>
-	<button ng-click="upload(croppedDataUrl, picFile.name)">Upload</button>
 	<span ng-show="result">Upload Successful</span>
     <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
-
+    <div class="form-group">
+    	First Name : <input required type="text" ng-model="firstName" />
+    	Last Name : <input required type="text" ng-model="lastName" />
+    	Gender :<input type="radio" ng-model="gender" value="Boy">Boy
+				<input type="radio" ng-model="gender" value="Girl">Girl
+    </div>
+	<button ng-click="upload(croppedDataUrl, picFile.name)">UPDATE</button>
 </form>
 
 <button ng-show="nextButton" ng-click="next()">Next</button>
