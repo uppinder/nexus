@@ -3,6 +3,9 @@ angular.module('nexus').controller('calendarController', [ '$scope', '$http', 'm
 	//These variables MUST be set as a minimum for the calendar to work
 	$scope.calendarView = 'month';
 	$scope.viewDate = new Date();
+	$scope.newTitle = "New Event Title";
+	$scope.newColorPrimary = "#ad2121";
+	$scope.newColorSecondary = "#fae3e3";
 	var actions = [{
 		label: '<i class=\'glyphicon glyphicon-pencil\'></i>',
 		onClick: function(args) {
@@ -18,6 +21,7 @@ angular.module('nexus').controller('calendarController', [ '$scope', '$http', 'm
 
 	// getting data from the server and displaying on the client side initially
 	function getData() {
+	$scope.events = [];
 	return $http({
 		method: 'GET',
 		url: '/user_data/events',
@@ -46,12 +50,15 @@ angular.module('nexus').controller('calendarController', [ '$scope', '$http', 'm
 
 	$scope.addEvent = function() {
 		var event = {
-			title: 'New Event',
-			venue: '',
-			description: '',
-			startsAt: moment().startOf('day').add(8, 'hours').toDate(),
-			endsAt: moment().startOf('day').add(10, 'hours').toDate(),
-			color: calendarConfig.colorTypes.important,
+			title: $scope.newTitle,
+			venue: $scope.newVenue,
+			description: $scope.newDescription,
+			startsAt: moment($scope.newStartsAt).toDate(),
+			endsAt: moment($scope.newEndsAt).toDate(),
+			color:{
+				primary: $scope.newColorPrimary,
+				secondary: $scope.newColorSecondary,
+			},
 			draggable: true,
 			resizable: true
 		};
@@ -59,8 +66,9 @@ angular.module('nexus').controller('calendarController', [ '$scope', '$http', 'm
 		$http.post('/user_data/events/add', {
 			event: event
 		})
-		.then(function() {
+		.then(function(data) {
 			// update the new event in the client side also
+			event._id = data.data.eventId;
 			$scope.events.push(event);
 		}, function(err) {
 			console.log("Couldn't add the event. ERR : " + err);

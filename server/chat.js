@@ -25,8 +25,8 @@ exports.initUser = function(socket, user) {
 				socket.join(room.room_id);
 			});
 
-			console.log(self.chatRooms[0].messages);
-			console.log(self.chatRooms[0].members);
+			// console.log(self.chatRooms[0].messages);
+			// console.log(self.chatRooms[0].members);
 			socket.emit('init', {
 				me: me,
 				rooms: self.chatRooms
