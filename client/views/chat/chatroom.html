@@ -4,7 +4,7 @@
       <ul class="media-list">
         <li ng-repeat="msg in getMessages()" class="media">
           <div class="media-body">
-            <{{msg.meta.sent_time | date:"h:mm a"}}>&nbsp;<!-- <a ng-click="viewProfile(msg.meta.sender.username)">{{msg.meta.sender.username}}</a>&nbsp;:&nbsp; --><div ng-bind-html="msg.text"></div>          
+            <a ng-click="viewProfile(msg.meta.sender.username)">{{msg.meta.sender.username}}</a><span style="float: right;" ><{{msg.meta.sent_time | date:"h:mm a"}}></span><div ng-bind-html="msg.text"></div>
           </div>
         </li>
       </ul>
@@ -29,7 +29,8 @@
     <div class="panel-heading" style="text-align: center;"><span style="font-size: 20px">Users</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-success" ng-click="addPeople()">Add</button></div>
     <div class="panel-body panel-height" style="overflow-y: scroll; height: 90%">
       <ul class="media-list">
-        <li></li>
+        {{ persons }}
+        <li ng-repeat="member in persons"></li>
       </ul>
     </div>
   </div>
