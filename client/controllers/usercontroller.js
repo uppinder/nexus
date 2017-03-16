@@ -2,6 +2,7 @@ angular.module('nexus').controller('userController', ['$scope', '$http', '$locat
 	function($scope, $http, $location, $state, $stateParams) {
 
 		$scope.name = "";
+		$scope.username = "";
 		$scope.profilePic = "";
 		$scope.isFriend = false;
 
@@ -29,7 +30,9 @@ angular.module('nexus').controller('userController', ['$scope', '$http', '$locat
 			if(data.status == 404)
 				$state.go('404');
 			else {
-				$scope.name = data.user.username;
+				// console.log(data);
+				$scope.name = data.user.name.firstname + " " + data.user.name.lastname;
+				$scope.username = data.user.username;
 				$scope.profilePic = $location.protocol() + '://' + location.host + '/public/' + data.user.profilePic;
 				$scope.isFriend = data.isFriend;
 			}

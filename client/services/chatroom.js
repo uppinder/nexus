@@ -2,14 +2,12 @@ angular.module('nexus')
 	.factory('chatroom', function(chatSocket, $rootScope) {
 		
 		var rooms = {};
-		var users = {};
 		// var users_online = {};
 
 		chatSocket.on('init', function(data) {
 			// console.log(data);
 			$rootScope.currentUser = data.me;
 			rooms = _.keyBy(data.rooms, o => o.room_id);
-			console.log(rooms);
 			chatSocket.forward('update');
 		});
 
@@ -67,6 +65,11 @@ angular.module('nexus')
 				// console.log(rooms[roomId]);
 				// console.log([] || rooms[roomId].messages);
 				return rooms[roomId] ? rooms[roomId].messages: [];
+			},
+			getMembers: function(roomId) {
+				// console.log(roomId);
+				// console.log(rooms[roomId]);
+				return rooms[roomId] ? rooms[roomId].members: [];
 			},
 			sendMessage: function(msg, roomId) {
 				// console.log(rooms[roomId]);

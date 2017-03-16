@@ -16,6 +16,12 @@ angular.module('nexus').controller('chatRoomController', ['$rootScope', '$scope'
 			return chatroom.getMessages($scope.roomId);
 		}
 
+		$scope.getMembers = function() {
+			// console.log($scope.roomId);
+			// console.log(chatroom.getMembers($scope.roomId));
+			return chatroom.getMembers($scope.roomId);
+		}
+
 		$scope.sendMsg = function(msg) {
 			if(!msg)
 				return;
