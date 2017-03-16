@@ -95,9 +95,13 @@ exports.addUsers = function(io, users, room) {
 	Chatroom.findById(room.id, function(err, room) {
 		if(!err && room) {
 			_.forEach(users, function(user, id) {
+				User.findById(user._id, function(err,user) {
+					user.chatRooms.addToSet({_id: room._id});
+						user.save();
+				});
 				room.members.addToSet({
 					role: 'member',
-					_id: user._id
+					user: { _id: user._id } 
 				});
 			});
 			room.save();
