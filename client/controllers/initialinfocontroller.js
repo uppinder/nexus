@@ -9,9 +9,17 @@ angular.module('nexus').controller('initialInfoController', ['$scope', '$state',
 					file: Upload.dataUrltoBlob(dataUrl, name)
 				}
 			}).then(function(res) {
-				// console.log(res);
-				$scope.result = res.data;
-				$scope.nextButton = true;
+				console.log(res);
+				$scope.result = res.data; // showing success message on pic upload
+				$http.post('/auth/new', {
+					firstname: $scope.firstName,
+					lastname: $scope.lastName,
+					gender: $scope.gender
+				}).then( function() {
+					$scope.nextButton = true;
+				}, function() {
+					console.log("error");
+				})
 			}, function(res) {
 				 if (res.status > 0)
 				  $scope.errorMsg = res.status + ': ' + res.data;
