@@ -43,6 +43,22 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         restricted: true
       }
     })
+    .state('main.group', {
+        url: '^/group/:id',
+        templateUrl: 'views/group.html',
+        controller: 'groupController',
+        params: {
+            restricted: true
+        }
+    })
+    .state('main.createGroup', {
+        url: '^/createGroup',
+        templateUrl: 'views/creategroup.html',
+        controller: 'createGroupController',
+        params: {
+            restricted: true
+        }
+    })
     .state('login',{
       url: '/login',
       templateUrl: 'views/auth/login.html',

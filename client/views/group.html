@@ -1,0 +1,32 @@
+NEW GROUP CREATED
+
+
+<div ng-show="error">{{errorMessage}}</div>
+
+
+NAME : <h1>{{curGroup.name}}</h1>
+<br><br>
+DESCRIPTION: <h2>{{curGroup.description}}</h2>
+
+<br>MEMBERS<br>
+<div ng-repeat="member in curGroup.members">
+    {{member}}<br>
+</div>
+
+<br><br>
+<form ng-submit="createPost()">
+    <p>
+        <label>Enter Post here</label><br>
+        <textarea name="newpost" ng-model="newpost" required></textarea>
+    </p>
+
+    <button type="submit">Post!</button>
+</form>
+
+
+<br>POSTS<br>
+
+<br>
+<div ng-repeat="post in curGroup.posts.slice().reverse() ">
+    {{post}}<br>
+</div>
