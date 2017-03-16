@@ -1,3 +1,4 @@
+// dependencies
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -5,8 +6,8 @@ var mongoose = require('mongoose');
 var bluebird = require('bluebird');
 var logger = require('morgan');
 var path = require('path');
-var passport = require('passport');
-var localStrategy = require('passport-local').Strategy;
+var passport = require('passport'); // for user authentication
+var localStrategy = require('passport-local').Strategy; // for passport-local authentication system
 
 //Import configuration settings
 var config = require('./config.js');
@@ -19,8 +20,10 @@ mongoose.connection.on('connected', function(){
 	console.log('Connected to MongoDB.');
 });
 
-//user schema
+// Users model/schema
 var User = require('./models/user.js');
+// events model schema 
+// var Event = require('./models/event.js')
 
 //routes
 var authRoutes = require('./routes/auth.js');
@@ -31,14 +34,14 @@ var downloadRoutes = require('./routes/download.js');
 
 var app = express();
 
-//middleware
-app.use(express.static(path.join(__dirname, '../client')));
+// middleware
+app.use(express.static(path.join(__dirname, '../client'))); // to use the app named 'CLIENT' and sendFile of that app
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-//express session (for session,cookies)
+// express session (for session,cookies)
 app.use(require('express-session')(config.express_session));
 
 app.use(passport.initialize());

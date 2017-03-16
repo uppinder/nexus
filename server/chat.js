@@ -55,7 +55,7 @@ exports.createRoom = function(socket, user, name, is_private) {
 			// console.log(room);
 			socket.join(room.room_id);	
 			socket.emit('new_room', room);
-		}		
+		}
 	});
 
 	User.findById(user._id, function(err, self) {

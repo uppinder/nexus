@@ -10,7 +10,7 @@ angular.module('nexus').factory('authService', ['$http',
 			logout: logout
 		};
 
-		function isLoggedIn() {
+		function isLoggedIn() { // returns true if a user is logged in
 			return user;
 		}
 
@@ -24,9 +24,7 @@ angular.module('nexus').factory('authService', ['$http',
 		}
 
 		function login(formData) {
-
 			formData.mailServer += '.iitg.ernet.in';
-
 			return $http.post('/auth/login', {
 					username: formData.username,
 					password: formData.password,

@@ -4,6 +4,7 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 		$scope.profilePic = 'https://localhost:4000/public/SkqEWypDx.jpg';
 		$scope.firstname = "";
 
+		// redirect main to the chatrooms list
 		if($state.current.name == 'main')
 			$state.go('main.chat');
 

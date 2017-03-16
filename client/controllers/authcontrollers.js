@@ -2,20 +2,22 @@ angular.module('nexus').controller('loginController', ['$scope', '$state', 'auth
 	function($scope, $state, authService) {
 
 		$scope.error = false;
-
 		$scope.login = function() {
 
+			// initial value
+			$scope.error = false;
+
+			// user deatils got from the login form
 			var userDetails = {
 				username: $scope.loginForm.username,
 				password: $scope.loginForm.password,
 				mailServer: $scope.loginForm.mailServer
 			};
-
-
+			
+			// call login from service
 			authService.login(userDetails)
 				.then(function(user) {
 					$scope.loginForm = {};
-					
 					if(!user.verified) {
 						$state.go('initialInfo');
 					} else {
@@ -23,6 +25,7 @@ angular.module('nexus').controller('loginController', ['$scope', '$state', 'auth
 					}
 				
 				})
+				// handle errors
 				.catch(function() {
 					//Needs better error handling
 					$scope.error = true;

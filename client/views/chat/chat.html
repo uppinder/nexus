@@ -27,6 +27,7 @@
             <li ng-repeat="(key, room) in getRooms()" ng-class="{'active': roomId === key}"><a ng-click="goToRoom(room.room_id)">{{room.name}}</a></li>
           </ul>
         </div>
+        <!-- for the chat of a particular chat room -->
         <div ui-view class="row custom">
        </div>
       </div>

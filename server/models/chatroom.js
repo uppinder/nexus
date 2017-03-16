@@ -22,7 +22,7 @@ var chatRoomSchema = new Schema({
 					sent_time: {type: Date}
 				}
 			}
-		] 
+		]
 });
 
 chatRoomSchema.plugin(deepPopulate);
