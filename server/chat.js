@@ -25,8 +25,8 @@ exports.initUser = function(socket, user) {
 				socket.join(room.room_id);
 			});
 
-			console.log(self.chatRooms[0].messages);
-			console.log(self.chatRooms[0].members);
+			// console.log(self.chatRooms[0].messages);
+			// console.log(self.chatRooms[0].members);
 			socket.emit('init', {
 				me: me,
 				rooms: self.chatRooms
@@ -69,35 +69,49 @@ exports.createRoom = function(socket, user, name, is_private) {
 exports.sendMessage = function(io, user, msg, room) {
 
 	// console.log(user, msg, room);
-	
-	var message = {
-		text: msg,
-		meta: {
-			sender: { _id: user._id},
-			sent_time: Date.now()
+	User.findById(user._id, function(err, self) {
+		if(!err && self) {
+
+			var message = {
+				text: msg,
+				meta: {
+					sender: self,
+					sent_time: Date.now()
+				}
+			}
+
+			Chatroom.findById(room.id, function(err, Room) {
+				if(!err && Room) {
+					// console.log(Room);
+					Room.messages.push(message);
+					Room.save();
+				}
+			});
+
+			console.log(message);
+
+			io.sockets.in(room.roomId).emit('message', message, room.roomId);
 		}
-	}
-
-	Chatroom.findById(room.id, function(err, Room) {
-		if(!err && Room) {
-			Room.messages.push(message);
-			Room.save();
-		}
-	});
-
-	console.log(message);
-
-	io.sockets.in(room.roomId).emit('message', message, room.roomId);
+	});	
 };
 
-exports.addUsers = function(io, users, room) {
-	console.log(users, room);
-	Chatroom.findById(room.id, function(err, room) {
+exports.addUsers = function(io, users, chatroom) {
+	console.log(users, chatroom);
+	Chatroom.findById(chatroom.id, function(err, room) {
 		if(!err && room) {
 			_.forEach(users, function(user, id) {
+				// Add user in room
 				room.members.addToSet({
 					role: 'member',
-					_id: user._id
+					user: {_id: user._id}
+				});
+				// Add room to user document
+				User.findById(user._id, function (err, self) {
+					console.log(err,self);
+					if(!err && self) {
+						self.chatRooms.addToSet({_id:room._id});
+						self.save();
+					}
 				});
 			});
 			room.save();

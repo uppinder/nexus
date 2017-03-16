@@ -4,9 +4,19 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 		$scope.profilePic = 'https://localhost:4000/public/SkqEWypDx.jpg';
 		$scope.firstname = "";
 
+		$scope.goToChat = function() {
+			$state.transitionTo('main.chat');
+		};
+
+		$scope.goToCalender = function() {
+			$state.transitionTo('main.calendar');
+		};
+
+
 		// redirect main to the chatrooms list
 		if($state.current.name == 'main')
-			$state.go('main.chat');
+			$scope.goToChat();
+
 
 		$scope.logout = function() {
 			chatSocket.disconnect();

@@ -9,12 +9,12 @@ angular.module('nexus')
 			// console.log(data);
 			$rootScope.currentUser = data.me;
 			rooms = _.keyBy(data.rooms, o => o.room_id);
-			console.log(rooms);
+			// console.log(rooms);
 			chatSocket.forward('update');
 		});
 
 		chatSocket.on('new_room', function(room) {
-			// console.log(room);
+			console.log(room);
 			rooms[room.room_id] = room;
 			// console.log(rooms);
 			chatSocket.forward('update');

@@ -32,8 +32,8 @@ angular.module('nexus').controller('initialInfoController', ['$scope', '$state',
 			.then(function() {
 				$state.go('main');
 			})
-			.catch(function() {
-				console.log('Error!');
+			.catch(function(err) {
+				console.log('Error:', err);
 			});
 		};
 	}

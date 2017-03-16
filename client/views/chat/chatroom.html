@@ -3,12 +3,12 @@
     <div class="panel-body panel-height" ng-nicescroll nice-scroll-top-end="topEndComplete()" nice-scroll-end="endScroll()" style="overflow-y: scroll; height:90%">
       <ul class="media-list">
         <li ng-repeat="msg in getMessages()" class="media">
-          <div class="media-body">
+          <div class="media-body" style="padding-left: 30px">
           <div class="row">
-            {{msg.meta.sender.username}} :
-            <div align="right" style="padding-right: 30px">{{msg.meta.sent_time | date:"h:mm a"}}</div>
+            <a ng-click="viewProfile(msg.meta.sender.username)">{{msg.meta.sender.username}}</a> : 
+            {{msg.meta.sent_time | date:"h:mm a"}}
           </div>
-          <div ng-bind-html="msg.text" style="padding-left: 30px"></div>         
+          <div ng-bind-html="msg.text"></div>         
           </div>
         </li>
       </ul>
