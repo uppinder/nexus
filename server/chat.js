@@ -10,7 +10,7 @@ exports.initUser = function(socket, user) {
 	User.findById(user._id).
 	populate({
 		path: 'chatRooms',
-		populate: 'members.user'
+		populate: {path: 'messages.meta.sender members.user '}
 	})
 	.exec(function(err, self) {
 		if(!err && self) {
@@ -25,8 +25,8 @@ exports.initUser = function(socket, user) {
 				socket.join(room.room_id);
 			});
 
-			// console.log(self.chatRooms[0].messages);
-			// console.log(self.chatRooms[0].members);
+			console.log(self.chatRooms[0].messages);
+			console.log(self.chatRooms[0].members);
 			socket.emit('init', {
 				me: me,
 				rooms: self.chatRooms
@@ -45,7 +45,7 @@ exports.createRoom = function(socket, user, name, is_private) {
 	});
 
 	room.members.addToSet({
-		_id: user._id,
+		user: { _id : user._id } ,
 		role: 'admin'
 	});
 
