@@ -20,7 +20,7 @@
           <span class="glyphicon glyphicon-file"></span>
         </button>
         </span>  
-        <input ng-model="m" type="text" class="form-control" placeholder="Enter Message" ng-keypress="($event.charCode == 13)?sendMsg(m):return" autofocus>
+        <input ng-model="m" type="text" class="form-control" placeholder="Enter Message" ng-keypress="checkText($event)" autofocus>
         <span class="input-group-btn">
           <button class="btn btn-info" type="button" ng-click="sendMsg(m)">Send</button>
         </span>
@@ -33,8 +33,7 @@
     <div class="panel-heading" style="text-align: center;"><span style="font-size: 20px">Users</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-success" ng-click="addPeople()">Add</button></div>
     <div class="panel-body panel-height" style="overflow-y: scroll; height: 90%">
       <ul class="media-list">
-        {{ persons }}
-        <li ng-repeat="member in persons"></li>
+        <li ng-repeat="p in getMembers()">{{p.user.username}}</li>
       </ul>
     </div>
   </div>

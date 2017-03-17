@@ -1,14 +1,22 @@
 angular.module('nexus').controller('chatController', ['$scope', '$state', '$uibModal', 'chatroom',
 	function($scope, $state, $uibModal, chatroom) {
 	
-		$scope.getRooms = chatroom.getRooms;
-		
+
 		$scope.$on('socket:update', function() {
 			$scope.$apply();
 		});
 		
+		$scope.goToPrivate = function() {
+			$state.transitionTo('main.chat.private');
+			$scope.roomId = null;
+		}
+
 		$scope.goToRoom = function(id) {
 			$state.transitionTo('main.chat.room', {roomId:id});
+		}
+
+		$scope.getRooms = function() {
+			return chatroom.getRooms();
 		}
 
 		// Get new room name

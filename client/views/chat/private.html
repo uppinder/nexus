@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      /** { margin: 0; padding: 0; box-sizing: border-box; }*/
+      body { font: 20px Helvetica, Arial; }
+      .custom {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 0 !important;
+        border-right: thin solid #909090;
+        height: 100%  ;
+      } 
+      .nav-pills > li > a {
+        border-radius: 0 !important;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div class="container-fluid">
+      <div class="row" style="height:600px;">
+        <div class="col-md-2 custom">
+          <ul class="nav nav-pills nav-stacked">
+          	<li ng-repeat="(key, friend) in getFriends()"><a ng-click="goToChat(key)">{{friend.name}}</a></li>
+          </ul>
+        </div>
+        <!-- for the chat of a particular chat room -->
+        <div ui-view class="row custom">
+       </div>
+      </div>
+    </div>
+
+</body>
+</html>

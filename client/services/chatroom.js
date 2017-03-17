@@ -1,14 +1,25 @@
 angular.module('nexus')
 	.factory('chatroom', function(chatSocket, $rootScope) {
 		
+		var me = {};
+		var friends = {};
 		var rooms = {};
-		var users = {};
 		// var users_online = {};
 
 		chatSocket.on('init', function(data) {
 			// console.log(data);
-			$rootScope.currentUser = data.me;
-			rooms = _.keyBy(data.rooms, o => o.room_id);
+			me = data.me;
+			console.log(me);
+			_.forEach(data.rooms, function(room) {
+				if(room.is_private)
+					friends[room.room_id] = room;
+				else 
+					rooms[room.room_id] = room;
+			});
+
+			// friends = _.keyBy(data.friends, o => o.username);
+			// rooms = _.keyBy(data.rooms, o => o.room_id);
+			// console.log(friends);
 			// console.log(rooms);
 			chatSocket.forward('update');
 		});
@@ -16,26 +27,30 @@ angular.module('nexus')
 		chatSocket.on('new_room', function(room) {
 			console.log(room);
 			rooms[room.room_id] = room;
-			// console.log(rooms);
+			console.log(rooms);
 			chatSocket.forward('update');
 		});
 
-		// chatSocket.on('new_user', function(data) {
-		// 	messages.push({
-		// 		user: {
-		// 			name: {username: 'Server'}
-		// 		},
-		// 		body: data.user.username + ' has joined.',
-		// 		date: Date.now()
-		// 	});
-		// 	users_online = data.users_online;
-		// 	console.log(users_online);
-		// 	chatSocket.forward('update');
-		// });
+		chatSocket.on('new_members', function(people, roomId) {
+			console.log(people);
+			rooms[roomId].members = rooms[roomId].members.concat(people);
+			chatSocket.forward('update');
+		});
+
+		chatSocket.on('added_to_room', function(newRoom) {
+			console.log(newRoom);
+			chatSocket.emit('join_room', newRoom.room_id);
+			rooms[newRoom.room_id] = newRoom;
+			console.log(rooms);
+			chatSocket.forward('update');
+		});
 
 		chatSocket.on('message', function(msg, roomId) {
 			// console.log(msg,roomId);
-			rooms[roomId].messages.push(msg);
+			if(rooms[roomId])
+				rooms[roomId].messages.push(msg);
+			else
+				friends[roomId].messages.push(msg);
 			// console.log(rooms[roomId].messages);
 			chatSocket.forward('update');
 		});
@@ -53,9 +68,21 @@ angular.module('nexus')
 		// 	chatSocket.forward('update');
 		// });
 
-		return {	
+		return {
+			getMe: function() {
+				return me;
+			},
+			getFriends: function() {
+				return friends;
+			},
+			getPrivateMessages: function(roomId) {
+				return friends[roomId] ? friends[roomId].messages : [];
+			},
 			getRooms: function() {
 				return rooms;
+			},
+			getPrivateRoomName: function(roomId) {
+				return friends[roomId] ? friends[roomId].name : "";
 			},
 			createRoom: function(name) {
 				chatSocket.emit('create_room', {
@@ -68,14 +95,26 @@ angular.module('nexus')
 				// console.log([] || rooms[roomId].messages);
 				return rooms[roomId] ? rooms[roomId].messages: [];
 			},
-			sendMessage: function(msg, roomId) {
+			getMembers: function (roomId) {
+				return rooms[roomId] ? rooms[roomId].members: [];
+			},
+			sendMessage: function(msg, roomId, is_private) {
 				// console.log(rooms[roomId]);
-				chatSocket.emit('message', {
-					body: msg,
-					room: {
+				var room = {};
+				if(is_private)
+					room = {
+						id: friends[roomId]._id,
+						roomId: roomId
+					};
+				else
+					room = {
 						id: rooms[roomId]._id,
 						roomId: roomId
-					} 
+					};
+
+				chatSocket.emit('message', {
+					body: msg,
+					room: room 
 				});
 			},
 			addFriends: function(users,roomId) {

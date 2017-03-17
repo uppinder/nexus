@@ -1,5 +1,6 @@
 // dependencies
 var express = require('express');
+var peer = require('peer');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
@@ -54,11 +55,13 @@ passport.deserializeUser(User.deserializeUser());
 
 var server = require('https').createServer(config.ssl, app);
 var	io     = require('socket.io')(server);
+var ExpressPeerServer = require('peer').ExpressPeerServer;
 
 //Socket.io Configuration
 require('./socket.js')(io, passport, cookieParser, config.express_session);
 
 // routes
+app.use('/peerjs', ExpressPeerServer(server, { debug: true}));
 app.use('/auth', authRoutes);
 app.use('/user_data', dataRoutes);
 app.use('/upload', uploadRoutes);

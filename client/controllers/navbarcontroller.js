@@ -12,7 +12,6 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 			$state.transitionTo('main.calendar');
 		};
 
-
 		// redirect main to the chatrooms list
 		if($state.current.name == 'main')
 			$scope.goToChat();
@@ -35,6 +34,7 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 		}
 
 		$scope.onSearchSelect = function($item) {
+			$scope.searchResult = "";
 			$state.go('main.user', {id:$item.username});
 		}
 

@@ -1,0 +1,33 @@
+<div class="col-md-7 custom" style="float:left; width: 66%">
+  <div>
+	<h1>{{getPrivateRoomName()}}<span style="float:right;">Call</span></h1>
+  </div> </hr>
+  <div class="panel panel-info" style="margin:0; height: 89%;">
+    <div class="panel-body panel-height" ng-nicescroll nice-scroll-top-end="topEndComplete()" nice-scroll-end="endScroll()" style="overflow-y: scroll; height:90%">
+      <ul class="media-list">
+         <li ng-repeat="msg in getPrivateMessages()" class="media">
+          <div class="media-body" style="padding-left: 30px">
+          <div class="row">
+            <a ng-click="viewProfile(msg.meta.sender.username)">{{msg.meta.sender.username}}</a> : 
+            {{msg.meta.sent_time | date:"h:mm a"}}
+          </div>
+          <div ng-bind-html="msg.text"></div>         
+          </div>
+         </li>
+      </ul>
+    </div>
+    <div class="panel-footer">
+      <div class="input-group">
+        <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ngf-select="upload($file)">
+          <span class="glyphicon glyphicon-file"></span>
+        </button>
+        </span>  
+        <input ng-model="m" type="text" class="form-control" placeholder="Enter Message" ng-keypress="checkText($event)" autofocus>
+        <span class="input-group-btn">
+          <button class="btn btn-info" type="button" ng-click="sendMsg(m)">Send</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
