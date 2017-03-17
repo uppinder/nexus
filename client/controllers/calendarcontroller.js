@@ -3,7 +3,7 @@ angular.module('nexus').controller('calendarController', [ '$scope', '$http', 'm
 	//These variables MUST be set as a minimum for the calendar to work
 	$scope.calendarView = 'month';
 	$scope.viewDate = new Date();
-	$scope.newTitle = "New Event Title";
+	//$scope.newTitle = "New Event Title";
 	$scope.newColorPrimary = "#ad2121";
 	$scope.newColorSecondary = "#fae3e3";
 	var actions = [{

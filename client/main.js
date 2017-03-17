@@ -4,6 +4,7 @@ var app = angular.module('nexus', [
   'mwl.calendar',
   'ngAnimate',
   'ngSanitize',
+  'ngMaterial',
   'angular-nicescroll',
   'btford.socket-io',
   'ngFileUpload', 

@@ -11,6 +11,13 @@ var userSchema = new Schema({
 	},
 	gender: {type: String},
 	profilePic: {type: String, default: 'SkqEWypDx.jpg'},
+	branch: {type: String},
+	rollNo: {type: Number},
+	program: {type: String},
+
+	doj: {type: Date},// date of joining 
+	dob: {type: Date},// date of birth 
+
 	verified: {type: Boolean, default: false},
 	friends: [{type: Schema.Types.ObjectId, ref: 'User'}],
 	chatRooms: [{type: Schema.Types.ObjectId, ref: 'Chatroom'}],

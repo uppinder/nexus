@@ -14,7 +14,12 @@ angular.module('nexus').controller('initialInfoController', ['$scope', '$state',
 				$http.post('/auth/new', {
 					firstname: $scope.firstName,
 					lastname: $scope.lastName,
-					gender: $scope.gender
+					gender: $scope.gender,
+					rollNumber: $scope.rollNumber,
+					programme: $scope.programme,
+					branch: $scope.branch,
+					dob: $scope.dob,
+					doy: $scope.doy
 				}).then( function() {
 					$scope.nextButton = true;
 				}, function() {
