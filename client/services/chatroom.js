@@ -43,11 +43,24 @@ angular.module('nexus')
 		});
 
 		chatSocket.on('message', function(msg, roomId) {
-			// console.log(msg,roomId);
-			if(rooms[roomId])
+			if(me.name != msg.meta.sender.username){
+				console.log('notification');
+				if(window.Notification && Notification.permission !== "denied") {
+					Notification.requestPermission(function(status) {  // status is "granted", if accepted by user
+						var n = new Notification('Message from '+msg.meta.sender.name.firstname, { 
+							body: msg.text,
+							icon: '/path/to/icon.png' // optional
+						}); 
+					});
+
+				}
+			}
+			if(rooms[roomId]){
 				rooms[roomId].messages.push(msg);
-			else
+			}
+			else{
 				friends[roomId].messages.push(msg);
+			}
 			// console.log(rooms[roomId].messages);
 			chatSocket.forward('update');
 		});
