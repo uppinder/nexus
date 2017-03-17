@@ -14,6 +14,13 @@
           <div ng-bind-html="msg.text"></div>         
           </div>
          </li>
+         <li ng-repeat="(key,user) in getPrivateIsTyping()" class="media">
+          <div class="media-body" style="padding-left: 30px">
+            <div class="row">
+              {{user.username}} is typing...
+            </div>
+          </div>
+         </li>
       </ul>
     </div>
     <div class="panel-footer">
@@ -23,7 +30,7 @@
           <span class="glyphicon glyphicon-file"></span>
         </button>
         </span>  
-        <input ng-model="m" type="text" class="form-control" placeholder="Enter Message" ng-keypress="checkText($event)" autofocus>
+        <input ng-model="m" type="text" class="form-control" placeholder="Enter Message" ng-keydown="checkText($event)" autofocus>
         <span class="input-group-btn">
           <button class="btn btn-info" type="button" ng-click="sendMsg(m)">Send</button>
         </span>

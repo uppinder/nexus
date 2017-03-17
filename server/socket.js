@@ -26,6 +26,14 @@ module.exports = function(io, passport, cookieParser, expressConfig) {
 			chatCtrl.sendMessage(io, user , data.body, data.room);
 		});
 
+		socket.on('is_typing', function(room) {
+			chatCtrl.isTyping(socket, user, room);
+		});
+
+		socket.on('stop_typing', function(room) {
+			chatCtrl.stopTyping(socket, user, room);
+		});
+
 		socket.on('create_room', function(room) {
 			console.log(room);
 			chatCtrl.createRoom(socket, user, room.name, room.is_private);
