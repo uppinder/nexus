@@ -6,26 +6,87 @@
       height:350px;
     }
   </style>
-<form name="profilePicUpload">
-	<h3>Upload Profile Pic:</h3>
-	<button ngf-select ng-model="picFile" accept="image/*">Select Picture</button>
-	<div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
-		<img-crop image="picFile | ngfDataUrl"
-		result-image="croppedDataUrl" ng-init="croppedDataUrl=''" area-type="square">
-		</img-crop>	
-	</div>
-	<div>
-		<img ng-src="{{croppedDataUrl}}">
-	</div>
-	<span ng-show="result">Upload Successful</span>
-    <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
-    <div class="form-group">
-    	First Name : <input required type="text" ng-model="firstName" />
-    	Last Name : <input required type="text" ng-model="lastName" />
-    	Gender :<input type="radio" ng-model="gender" value="Boy">Boy
-				<input type="radio" ng-model="gender" value="Girl">Girl
-    </div>
-	<button ng-click="upload(croppedDataUrl, picFile.name)">UPDATE</button>
-</form>
 
-<button ng-show="nextButton" ng-click="next()">Next</button>
+<div class="flexbox-parent">
+    <md-content layout="row" layout-align="center center" layout-padding="layout-padding" ng-cloak="ng-cloak" class="login-form" style="min-height: 600px">
+        <md-card flex="grow" flex-gt-sm="70" flex-gt-md="50"> 
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2><span>User Details</span></h2>
+                </div>
+            </md-toolbar>
+
+            <md-card-content>
+                <form name="profilePicUpload" ng-submit="upload(croppedDataUrl, picFile.name)" >
+                    <md-input-container class="md-block">
+                        <label>First Name</label>
+                        <input type="text" name="firstName" ng-model="firstName" placeholder="John" required=""/>
+                        <div ng-messages="Form.firstName.$error" role="alert" multiple="">
+                            <div ng-message="required" class="my-message">Please enter your First Name.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Last Name</label>
+                        <input type="text" name="lastName" ng-model="lastName" placeholder="Doe" required=""/>
+                        <div ng-messages="Form.lastName.$error" role="alert" multiple="">
+                            <div ng-message="required" class="my-message">Please enter your Last Name.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Roll Number</label>
+                        <input type="text" name="rollNumber" ng-model="rollNumber" placeholder="170101001" required=""/>
+                        <div ng-messages="Form.rollNumber.$error" role="alert" multiple="">
+                            <div ng-message="required" class="my-message">Please enter your Roll Name.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                      <md-radio-group ng-model="gender" layout="row">
+                        <md-radio-button value="Male" class="md-primary"> Male </md-radio-button>
+                        <md-radio-button value="female"> Female </md-radio-button>
+                      </md-radio-group>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                      <label>Programme</label>
+                      <md-select name="programme" ng-model="programme" required="">
+                        <md-option value="btech">B. Tech</md-option>
+                        <md-option value="mtech">M. Tech</md-option>
+                        <md-option value="phd">PHD</md-option>
+                      </md-select>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                      <label>Branch</label>
+                      <md-select name="branch" ng-model="branch" required="">
+                        <md-option value="CSE">Computer Science & Engineering</md-option>
+                        <md-option value="mech">Mechanical</md-option>
+                        <md-option value="civil">Civil</md-option>
+                        <md-option value=""></md-option>
+                      </md-select>
+                    </md-input-container class="md-block">
+                    <md-input-container class="md-block">
+                      <md-datepicker ng-model="dob" md-placeholder="Date of Birth" md-open-on-focus></md-datepicker>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                      <md-datepicker ng-model="doj" md-placeholder="Date of Joining" md-open-on-focus></md-datepicker>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <md-button ngf-select class="md-block md-raised md-primary" ng-model="picFile" accept="image/*">Select Profile Picture</md-button>
+                        <div layout="flex" ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
+                            <img-crop image="picFile | ngfDataUrl"
+                            result-image="croppedDataUrl" ng-init="croppedDataUrl=''" area-type="square">
+                            </img-crop> 
+                        </div>
+                        <div>
+                            <img ng-src="{{croppedDataUrl}}">
+                        </div>
+                        <span ng-show="result">Upload Successful</span>
+                        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                    </md-input-container>
+                    <md-button type="submit" class="md-block md-raised md-primary">&nbsp; Submit &nbsp;</md-button>
+                    <md-button ng-show="nextButton" ng-click="next()" class="md-block md-raised md-primary">Next</md-button>
+                </form>             
+            </md-card-content>
+
+        </md-card>
+    </md-content>
+</div>
+    

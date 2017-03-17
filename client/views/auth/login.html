@@ -1,32 +1,40 @@
-<div class="container">
-	<h1>Login</h1>
-	<div ng-show="error">{{errorMessage}}</div>
-	<form ng-submit="login()" class="form-horizontal">
-		<div class="form-group">
-			<label for="id_username" class="control-label col-sm-2">Webmail:</label>
-			<div class="col-sm-10">	
-				<input type="text" name="username" ng-model="loginForm.username" id="id_username" required>	
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="id_password" class="control-label col-sm-2">Password:</label>
-			<div class="col-sm-10">
-				<input type="password" name="password" ng-model="loginForm.password" id="id_password" required>
-			</div>
-		</div>
-		<div class="form-group">
-				<div class="col-sm-2"><label for="id_mailserver">Mail Server:</label></div>
-				<div class="col-sm-1"><select name="server" id="id_mailserver" ng-model="loginForm.mailServer">
-				  <option value="">Select</option>
-		          <option value="teesta">Teesta</option>
-		          <option value="naambor">Naambor</option>
-		          <option value="disang">Disang</option>
-		          <option value="tamdil">Tamdil</option>
-		          <option value="dikrong">Dikrong</option>
-		       </select></div>
-		</div>
-		<div class="form-group">
-			<button type="submit" class="btn-success">Login</button>
-		</div>
-	</form>
+<div class="flexbox-parent">
+	<md-content layout="row" layout-align="center center" layout-padding="layout-padding" ng-cloak="ng-cloak" class="login-form" style="min-height: 600px">
+	  <md-card flex="flex" flex-gt-sm="50" flex-gt-md="33"> 
+		<md-toolbar>
+		  <div class="md-toolbar-tools">
+			<h2><span>Login Form</span></h2>
+		  </div>
+		</md-toolbar>
+		<md-card-content>
+		  <form name="Form" ng-submit="login()">
+			<md-input-container class="md-block">
+			  <label>Webmail</label>
+			  <input type="text" name="email" ng-model="loginForm.username" placeholder="webmail" required=""/>
+			  <div ng-messages="Form.email.$error" role="alert" multiple="">
+				<div ng-message="required" class="my-message">Please enter your email.</div>
+			  </div>
+			</md-input-container>
+			<md-input-container class="md-block">
+			  <label>Password</label>
+			  <input type="password" name="password" ng-model="loginForm.password" placeholder="password" required=""/>
+			  <div ng-messages="Form.password.$error" role="alert" multiple="">
+				<div ng-message="required" class="my-message">Please enter your password.</div>
+			  </div>
+			</md-input-container>
+			<md-input-container class="md-block">
+	          <label>Webmail</label>
+	          <md-select name="server" ng-model="loginForm.mailServer" required="">
+	            <md-option value="dikrong">Dikrong</md-option>
+	            <md-option value="disang">Disang</md-option>
+	            <md-option value="naambor">Naambor</md-option>
+	            <md-option value="tamdil">Tamdil</md-option>
+	            <md-option value="teesta">Teesta</md-option>
+	          </md-select>
+	        </md-input-container>
+			<md-button type="submit" class="md-raised md-primary">&nbsp; Login &nbsp;</md-button>
+		  </form>
+		</md-card-content>
+	  </md-card>
+	</md-content>
 </div>

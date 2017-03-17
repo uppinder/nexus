@@ -121,7 +121,12 @@ router.post('/new', function(req,res) {
     }
     user.name.firstname = req.body.firstname;
     user.name.lastname = req.body.lastname;
-    user.name.gender = req.body.gender;
+    user.gender = req.body.gender;
+    user.rollNo = req.body.rollNumber;
+    user.programme = req.body.programme;
+    user.branch = req.body.branch;
+    user.doj = req.body.doj;
+    user.dob = req.body.dob;
     user.save(function() {
       res.status(200).json({
         status: "successful"
