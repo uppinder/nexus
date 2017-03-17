@@ -116,6 +116,7 @@ exports.addUsers = function(io, users, chatroom) {
 						self.chatRooms.addToSet({_id:room._id});
 						self.save();
 					}
+				});
 			});
 			// After adding user to chat room
 			// Emit socket event to all users that
