@@ -40,14 +40,12 @@
     <div class="panel-body panel-height" ng-nicescroll nice-scroll-top-end="topEndComplete()" nice-scroll-end="endScroll()" style="overflow-y: scroll; height:90%">
       <ul class="media-list">
         <li ng-repeat="msg in getMessages()" class="media">
-          <div class="media-body">
+          <div class="media-body" style="padding-left: 30px">
           <div class="row">
-            <div style="display: table-cell;float:left;padding-left: 30px"><h5>{{msg.meta.sender.name.firstname}} {{msg.meta.sender.name.lastname}}</h5></div><div style="display: table-cell;float:right;padding-right: 50px">{{msg.meta.sent_time | date:"h:mm a"}}</div>
-            <div class="talk-bubble tri-right left-top">
-              <div class="talktext">
-                <p style="padding-left: 50px" ng-bind-html="msg.text"></p>
-              </div>
-            </div>
+            <a ng-click="viewProfile(msg.meta.sender.username)">{{msg.meta.sender.username}}</a> : 
+            {{msg.meta.sent_time | date:"h:mm a"}}
+          </div>
+          <div ng-bind-html="msg.text"></div>         
           </div>
         </li>
       </ul>
@@ -59,7 +57,7 @@
           <span class="glyphicon glyphicon-file"></span>
         </button>
         </span>  
-        <input ng-model="m" type="text" class="form-control" placeholder="Enter Message" ng-keypress="($event.charCode == 13)?sendMsg(m):return" autofocus>
+        <input ng-model="m" type="text" class="form-control" placeholder="Enter Message" ng-keypress="checkText($event)" autofocus>
         <span class="input-group-btn">
           <button class="btn btn-info" type="button" ng-click="sendMsg(m)">Send</button>
         </span>
@@ -72,7 +70,7 @@
     <div class="panel-heading" style="text-align: center;"><span style="font-size: 20px">Users</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-success" ng-click="addPeople()">Add</button></div>
     <div class="panel-body panel-height" style="overflow-y: scroll; height: 90%">
       <ul class="media-list">
-        <li ng-repeat="member in getMembers()">{{member.user.name.firstname}} {{member.user.name.lastname}}</li>
+        <li ng-repeat="p in getMembers()">{{p.user.username}}</li>
       </ul>
     </div>
   </div>

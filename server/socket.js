@@ -31,6 +31,10 @@ module.exports = function(io, passport, cookieParser, expressConfig) {
 			chatCtrl.createRoom(socket, user, room.name, room.is_private);
 		});
 
+		socket.on('join_room', function(roomId) {
+			chatCtrl.joinRoom(socket, roomId);
+		});
+
 		socket.on('new_users', function(data) {
 			chatCtrl.addUsers(io, data.users, data.room);
 		});

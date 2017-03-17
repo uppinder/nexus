@@ -17,17 +17,21 @@ angular.module('nexus').controller('chatRoomController', ['$rootScope', '$scope'
 		}
 
 		$scope.getMembers = function() {
-			// console.log($scope.roomId);
 			// console.log(chatroom.getMembers($scope.roomId));
 			return chatroom.getMembers($scope.roomId);
 		}
 
+		$scope.checkText = function(evt) {
+			if(evt.charCode == 13) {
+				$scope.sendMsg($scope.m);
+			}
+		}
+		
 		$scope.sendMsg = function(msg) {
 			if(!msg)
 				return;
-
-			chatroom.sendMessage(msg, $scope.roomId);
 			$scope.m = "";
+			chatroom.sendMessage(msg, $scope.roomId, false);
 		}
 
 		$scope.viewProfile = function(id) {
@@ -74,7 +78,7 @@ angular.module('nexus').controller('chatRoomController', ['$rootScope', '$scope'
 angular.module('nexus').controller('addPeopleModalCtrl', function($scope, $http, $uibModalInstance) {
 
 	$scope.persons = {};
-	console.log($scope.persons);
+	// console.log($scope.persons);
 	$scope.searchFriends = function(val) {
 		return $http.get('/search/friends', {params: {key:val}})
 				.then(function(res) {

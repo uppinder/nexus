@@ -5,9 +5,18 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 		$scope.firstname = "";
 		$scope.username = "";
 
+		$scope.goToChat = function() {
+			$state.transitionTo('main.chat');
+		};
+
+		$scope.goToCalender = function() {
+			$state.transitionTo('main.calendar');
+		};
+
 		// redirect main to the chatrooms list
 		if($state.current.name == 'main')
-			$state.go('main.chat');
+			$scope.goToChat();
+
 
 		$scope.logout = function() {
 			chatSocket.disconnect();
@@ -26,6 +35,7 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 		}
 
 		$scope.onSearchSelect = function($item) {
+			$scope.searchResult = "";
 			$state.go('main.user', {id:$item.username});
 		}
 

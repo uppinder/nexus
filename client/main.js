@@ -33,10 +33,26 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     // chat ==> chat rooms 
     .state('main.chat.room', {
-      url: '^/room/:roomId',
+      url: '/room/:roomId',
       templateUrl: 'views/chat/chatroom.html',
       controller: 'chatRoomController',
       params: {
+        restricted: true
+      }
+    })
+    .state('main.chat.private', {
+      url:'/p',
+      templateUrl:'views/chat/private.html',
+      controller: 'privateMainController',
+      params: {
+        restricted: true
+      }
+    })
+    .state('main.chat.private.chat', {
+      url: '/:id',
+      templateUrl: 'views/chat/privatechat.html',
+      controller: 'privateChatController',
+      restricted: {
         restricted: true
       }
     })

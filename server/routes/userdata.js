@@ -1,5 +1,7 @@
 var router = require('express').Router();
 var User = require('../models/user.js');
+var chatRoom = require('../models/chatroom.js');
+var shortid = require('shortid');
 var Event = require('../models/event.js')
 var _ = require('lodash');
 
@@ -31,7 +33,7 @@ router.post('/add', function(req, res) {
 	User.findOne({username:req.body.username}, function(err, acc) {
 		if(err || !acc) {
 			console.log(err);
-			res.status(400).json({
+			return res.status(400).json({
 				status: "Couldn't add as friend"
 			});
 		}
@@ -39,9 +41,36 @@ router.post('/add', function(req, res) {
 		User.findById(req.user._id, function(err, user) {
 			user.friends.addToSet(acc);
 			acc.friends.addToSet(req.user._id);
+
+			// Create chatroom for these two
+			var room = new chatRoom({
+				name: acc.username,
+				room_id: shortid.generate(),
+				is_private: true,
+				members: [],
+				messages: []
+			});
+
+			room.members.push({
+				user: acc,
+				role: 'member'
+			});
+			room.members.push({
+				user: user,
+				role: 'member'
+			});
+
+			acc.chatRooms.push(room);
+			user.chatRooms.push(room);
+
+			room.save(function(err) {
+				if(err)
+					console.log(err);
+			});
+
 			acc.save(function() {
 				user.save(function() {
-					res.status(200).json({
+					return res.status(200).json({
 						status: 'User added as friend!'
 					});
 				});	
@@ -54,7 +83,7 @@ router.get('/pic', function(req, res) {
 	User.findById(req.user._id, function(err, acc) {
 		if(err) {
 			console.log(err);
-			res.status(400).send('Invalid user.');
+			return res.status(400).send('Invalid user.');
 		}
 
 		var payload = {
@@ -63,7 +92,7 @@ router.get('/pic', function(req, res) {
 			username: acc.username
 		};
 
-		res.status(200).json(payload);
+		return res.status(200).json(payload);
 	});
 });
 
