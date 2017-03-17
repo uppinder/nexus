@@ -26,124 +26,53 @@
     <div>
       <form name="newEvent">
         <fieldset>
-        <legend>Add New Event</legend>
+        <legend><h3>Add New Event</h3></legend>
         <div layout-gt-xs="row">
           <md-input-container class="md-block" flex-gt-xs>
             <label>Title</label>
-            <input ng-model="newTitle" placeholder="New Event Title">
+            <input ng-model="newTitle" placeholder="New Event Title" required="" ">
           </md-input-container>
           <md-input-container class="md-block" flex-gt-xs>
             <label>Venue</label>
             <input ng-model="newVenue" placeholder="Event Venue">
           </md-input-container>
-          <md-input-container>
-            <label>Enter date</label>
-            <md-datetimepicker ng-model="user.submissionDate"></md-datetimepicker>
+        </div>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex-gt-xs>
+            <input mdc-datetime-picker="" date="true" time="true" type="text" id="datetime" placeholder="Starting Time" show-todays-date="" max-date="newEndsAt" ng-model="newStartsAt" class="md-input" readonly="readonly" >
+          </md-input-container >
+          <md-input-container class="md-block" flex-gt-xs>
+            <input mdc-datetime-picker="" date="true" time="true" type="text" id="datetime" placeholder="Ending Time" show-todays-date="" min-date="newStartsAt" ng-model="newEndsAt" class="md-input" readonly="readonly" >
           </md-input-container>
         </div>
-
-        <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>First name</label>
-            <input ng-model="user.firstName">
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Primary Color</label>
+            <div md-color-picker ng-model="newColorPrimary"></div>
           </md-input-container>
-
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>Long Last Name That Will Be Truncated And 3 Dots (Ellipsis) Will Appear At The End</label>
-            <input ng-model="theMax">
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Secondary Color</label>
+            <div md-color-picker ng-model="newColorSecondary"></div>
           </md-input-container>
         </div>
-
         <md-input-container class="md-block">
-          <label>Address</label>
-          <input ng-model="user.address">
+          <label>Description</label>
+          <textarea ng-model="newDescription" md-maxlength="150" rows="5" md-select-on-focus></textarea>
         </md-input-container>
-
-        <md-input-container md-no-float class="md-block">
-          <input ng-model="user.address2" placeholder="Address 2">
-        </md-input-container>
-
-        <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>City</label>
-            <input ng-model="user.city">
-          </md-input-container>
-
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>State</label>
-            <md-select ng-model="user.state">
-              <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-                {{state.abbrev}}
-              </md-option>
-            </md-select>
-          </md-input-container>
-
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>Postal Code</label>
-            <input name="postalCode" ng-model="user.postalCode" placeholder="12345"
-                   required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
-
-            <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
-              <div ng-message="required" class="my-message">You must supply a postal code.</div>
-              <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
-                code.
-              </div>
-              <div ng-message="md-maxlength" class="my-message">
-                Don't use the long version silly...we don't need to be that specific...
-              </div>
-            </div>
-          </md-input-container>
-        </div>
-
-        <md-input-container class="md-block">
-          <label>Biography</label>
-          <textarea ng-model="user.biography" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-        </md-input-container>
+        <md-button ng-click="addEvent()" type="submit" class="md-raised md-primary">&nbsp; Add New Event &nbsp;</md-button>
         </fieldset>
       </form>
     </div>
   </md-content>
 
-
-
-  <form class="form-horizontal">
-    <!-- start date and end date -->
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="startdate">Starts:</label>
-      <div class="col-sm-4">
-        <input type="date" class="form-control" id="startdate" placeholder="Starting Time" ng-model="newStartsAt">
-      </div>
-      <label class="control-label col-sm-2" for="enddate">Ends:</label>
-      <div class="col-sm-4">
-        <input type="date" class="form-control" id="enddate" placeholder="Ending Time" ng-model="newEndsAt">
-      </div>
-    </div>
-    <!-- colour -->
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="primarycolor">Primary Colour:</label>
-      <div class="col-sm-4">
-        <input class="form-control" id="primarycolor" colorpicker type="color" ng-model="newColorPrimary">
-      </div>
-      <label class="control-label col-sm-2" for="secondarycolor">Secondary Colour:</label>
-      <div class="col-sm-4">
-        <input class="form-control" id="secondarycolor" colorpicker type="color" ng-model="newColorSecondary">
-      </div>
-    </div>
-    <!-- Description -->
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="description">Description:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="description" placeholder="Description" ng-model="newDescription">
-      </div>
-    </div>
-    <div class="form-group">
-      <button type="button" class="btn btn-primary button-lg pull-right" ng-click="addEvent()">Add</button>
-    </div>
-  </fieldset>
+  <form>
+    <fieldset>
+      <legend>
+        <h3>Edit events</h3>
+      </legend>
+    </fieldset>
   </form>
-  <h3 id="event-editor">
-    Edit events
-  </h3><div class="clearfix"></div>
+  <div class="clearfix"></div>
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -159,46 +88,44 @@
     <tbody>
       <tr ng-repeat="event in events track by $index">
         <td>
-          <input type="text" class="form-control" ng-model="event.title" placeholder="Event Title">
+          <md-input-container class="md-block" flex-gt-xs>
+            <input type="text" ng-model="event.title" placeholder="Event Title">
+          </md-input-container>
         </td>
         <td>
-          <input type="text" class="form-control" ng-model="event.venue" placeholder="Venue">
+          <md-input-container class="md-block" flex-gt-xs>
+            <input type="text" ng-model="event.venue" placeholder="Venue">
+          </md-input-container>
         </td>
         <td>
-          <label>Primary</label><input class="form-control" colorpicker type="color" ng-model="event.color.primary">
-          <br>
-          <label>Secondary</label><input class="form-control" colorpicker type="color" ng-model="event.color.secondary">
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Primary</label>
+            <div md-color-picker ng-model="event.color.primary"></div>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Secondary</label>
+            <div md-color-picker ng-model="event.color.secondary"></div>
+          </md-input-container>
         </td>
         <td>
-          <p class="input-group" style="width: 100%;max-width: 250px">
-            <input type="text" class="form-control" uib-datepicker-popup="dd MMMM yyyy" ng-model="event.startsAt" readonly is-open="event.startOpen" close-text="Close" >
-            <span class="input-group-btn">
-              <button type="button" class="btn btn-default" ng-click="toggle($event, 'startOpen', event)">
-                <i class="glyphicon glyphicon-calendar"></i>
-              </button>
-            </span>
-          </p>
-          <div uib-timepicker ng-model="event.startsAt" hour-step="1" minute-step="15" show-meridian="true"></div>
+          <md-input-container class="md-block" flex-gt-xs>
+            <input mdc-datetime-picker="" date="true" time="true" type="text" id="datetime" placeholder="Starting Time" show-todays-date="" max-date="event.endsAt" ng-model="event.startsAt" class="md-input" readonly="readonly">
+          </md-input-container >
         </td>
         <td>
-          <p class="input-group" style="width: 100%;max-width: 250px">
-            <input type="text" class="form-control" readonly uib-datepicker-popup="dd MMMM yyyy" ng-model="event.endsAt" is-open="event.endOpen" close-text="Close">
-            <span class="input-group-btn">
-              <button type="button" class="btn btn-default" ng-click="toggle($event, 'endOpen', event)">
-                <i class="glyphicon glyphicon-calendar"></i>
-              </button>
-            </span>
-          </p>
-          <div uib-timepicker ng-model="event.endsAt" hour-step="1" minute-step="15" show-meridian="true">
-          </div>
+          <md-input-container class="md-block" flex-gt-xs>
+            <input mdc-datetime-picker="" date="true" time="true" type="text" id="datetime" placeholder="Starting Time" show-todays-date="" min-date="event.startsAt" ng-model="event.endsAt" class="md-input" readonly="readonly">
+          </md-input-container >
         </td>
         <td>
-          <input type="text" class="form-control" ng-model="event.description" placeholder="Description">
+          <md-input-container class="md-block" flex-gt-xs>
+            <textarea ng-model="event.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+          </md-input-container>
         </td>
         <td>
-          <button class="btn btn-info" ng-click="eventUpdate(event)">Update</button>
+          <md-button class="md-raised" style="background-color:lightgreen" ng-click="eventUpdate(event)">Update</md-button>
           <br><br>
-          <button style="width: 100%;" class="btn btn-danger" ng-click="eventDelete(event._id, $index)">Delete</button>
+          <md-button class="md-raised md-warn" ng-click="eventDelete(event._id, $index)">Delete</md-button>
         </td>
       </tr>
     </tbody>

@@ -37,6 +37,7 @@ angular.module('nexus').controller('calendarController', [ '$scope', '$http', 'm
 		.then(function(data) {
 			if(data !== "")
 				data.forEach( function(event) {
+					// console.log(event.startsAt, event.endsAt);
 					event.startsAt = new Date(event.startsAt);
 					event.endsAt = new Date(event.endsAt);
 				});
@@ -70,6 +71,11 @@ angular.module('nexus').controller('calendarController', [ '$scope', '$http', 'm
 			// update the new event in the client side also
 			event._id = data.data.eventId;
 			$scope.events.push(event);
+			$scope.newTitle = "";
+			$scope.newDescription = "";
+			$scope.newVenue = "";
+			$scope.newEndsAt = "";
+			$scope.newStartsAt = "";
 		}, function(err) {
 			console.log("Couldn't add the event. ERR : " + err);
 		});

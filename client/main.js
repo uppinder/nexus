@@ -5,6 +5,8 @@ var app = angular.module('nexus', [
   'ngAnimate',
   'ngSanitize',
   'ngMaterial',
+  'ngMaterialDatePicker',
+  'mdColorPicker',
   'angular-nicescroll',
   'btford.socket-io',
   'ngFileUpload', 
