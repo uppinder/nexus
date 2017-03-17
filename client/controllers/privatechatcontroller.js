@@ -39,15 +39,38 @@ angular.module('nexus').controller('privateChatController', ['$scope', '$statePa
 			return chatroom.getPrivateMessages($scope.roomId);
 		}
 
+		$scope.getPrivateIsTyping = function() {
+			return chatroom.getPrivateIsTyping($scope.roomId);
+		}
+
 		$scope.getPrivateRoomName = function() {
 			return chatroom.getPrivateRoomName($scope.roomId);
 		}
 
+		$scope.istyping = false;
 		$scope.checkText = function(evt) {
-			if(evt.charCode == 13) {
-				$scope.sendMsg($scope.m);
+
+			if($scope.m !== "" && !$scope.istyping) {
+				console.log("Started typing..");
+				chatroom.isTyping($scope.roomId, true);
+				$scope.istyping = true;
 			}
+
+			if(evt.keyCode == 13 && $scope.istyping) {
+				console.log("Finished typing");
+				chatroom.stopTyping($scope.roomId, true);
+				$scope.sendMsg($scope.m);
+				$scope.istyping = false;
+			}
+
+			if(evt.keyCode == 8 && $scope.istyping && $scope.m.length == 1) {
+				$scope.istyping = false;
+				console.log("Finished typing");
+				chatroom.stopTyping($scope.roomId, true);
+			}
+
 		}
+		
 
 		$scope.sendMsg = function(msg) {
 			if(!msg)

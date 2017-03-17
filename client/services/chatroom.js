@@ -11,16 +11,12 @@ angular.module('nexus')
 			me = data.me;
 			console.log(me);
 			_.forEach(data.rooms, function(room) {
-				if(room.is_private)
+				room.istyping = {};
+				if(room.is_private) 
 					friends[room.room_id] = room;
 				else 
 					rooms[room.room_id] = room;
 			});
-
-			// friends = _.keyBy(data.friends, o => o.username);
-			// rooms = _.keyBy(data.rooms, o => o.room_id);
-			// console.log(friends);
-			// console.log(rooms);
 
 			chatSocket.forward('update');
 		});
@@ -56,6 +52,22 @@ angular.module('nexus')
 			chatSocket.forward('update');
 		});
 
+		chatSocket.on('user_typing', function(user, roomId) {
+			console.log(rooms, user, roomId);
+			if(rooms[roomId])
+				rooms[roomId].istyping[user._id] = user;
+			else
+				friends[roomId].istyping[user._id] = user;
+			chatSocket.forward('update');
+		});
+
+		chatSocket.on('user_stop_typing', function(user, roomId) {
+			if(rooms[roomId])
+				delete rooms[roomId].istyping[user._id];
+			else
+				delete friends[roomId].istyping[user._id];
+			chatSocket.forward('update');		
+		});
 		// chatSocket.on('leave', function(data) {
 		// 	messages.push({
 		// 		user: {
@@ -79,6 +91,9 @@ angular.module('nexus')
 			getPrivateMessages: function(roomId) {
 				return friends[roomId] ? friends[roomId].messages : [];
 			},
+			getPrivateIsTyping: function(roomId) {
+				return friends[roomId] ? friends[roomId].istyping : {};
+			},
 			getRooms: function() {
 				return rooms;
 			},
@@ -96,22 +111,34 @@ angular.module('nexus')
 				// console.log([] || rooms[roomId].messages);
 				return rooms[roomId] ? rooms[roomId].messages: [];
 			},
+			getIsTyping: function(roomId) {
+				return rooms[roomId] ? rooms[roomId].istyping: {};
+			},
 			getMembers: function (roomId) {
 				return rooms[roomId] ? rooms[roomId].members: [];
 			},
+			isTyping: function(roomId, is_private) {
+				var room = {
+					id: is_private? friends[roomId]._id: rooms[roomId]._id,
+					roomId: roomId
+				};
+
+				chatSocket.emit('is_typing', room);
+			},
+			stopTyping: function(roomId, is_private) {
+				var room = {
+					id: is_private? friends[roomId]._id: rooms[roomId]._id,
+					roomId: roomId
+				};
+
+				chatSocket.emit('stop_typing', room);
+			},
 			sendMessage: function(msg, roomId, is_private) {
 				// console.log(rooms[roomId]);
-				var room = {};
-				if(is_private)
-					room = {
-						id: friends[roomId]._id,
-						roomId: roomId
-					};
-				else
-					room = {
-						id: rooms[roomId]._id,
-						roomId: roomId
-					};
+				var room = {
+					id: is_private? friends[roomId]._id: rooms[roomId]._id,
+					roomId: roomId
+				};
 
 				chatSocket.emit('message', {
 					body: msg,

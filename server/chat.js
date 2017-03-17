@@ -91,6 +91,18 @@ exports.sendMessage = function(io, user, msg, room) {
 	});	
 };
 
+exports.isTyping = function(socket, user, room) {
+	User.findById(user._id, function(err, self) {
+		socket.in(room.roomId).emit('user_typing', self, room.roomId);
+	});
+}
+
+exports.stopTyping = function(socket, user, room) {
+	User.findById(user._id, function(err, self) {
+		socket.in(room.roomId).emit('user_stop_typing', self, room.roomId);	
+	});
+}
+
 exports.addUsers = function(io, users, chatroom) {
 	console.log(users, chatroom);
 	Chatroom.findById(chatroom.id, function(err, room) {
