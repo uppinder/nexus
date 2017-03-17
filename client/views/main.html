@@ -13,29 +13,35 @@
   </style>
 </head>
 <body>
-<nav class="navbar navbar-inverse " ng-controller="navbarController">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" ui-sref="main">Nexus</a>
+  <script type="text/ng-template" id="customTemplate.html">
+  <a>
+    <img ng-src="https://localhost:4000/public/{{match.model.profilePic}}" width="32">&nbsp;&nbsp;
+    {{match.model.name.firstname + ' ' + match.model.name.lastname}}
+  </a>  
+  </script>
+  <nav class="navbar navbar-inverse " ng-controller="navbarController">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" ui-sref="main">Nexus</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a ng-click="goToChat()">Chat</a></li>
+        <li><a ng-click="goToCalender()">Agenda</a></li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" ng-model="searchResult" uib-typeahead="user.username for user in searchUsers($viewValue)"
+          typeahead-on-select="onSearchSelect($item)" typeahead-template-url="customTemplate.html">
+          </div>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><img style="width: 40px;height: 40px;margin-top: 5px;" ng-src="{{profilePic}}"></li>
+        <li><a href="/user/{{username}}">{{firstname}}</a></li>
+        <li><a ng-click="logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
     </div>
-    <ul class="nav navbar-nav">
-      <li><a ng-click="goToChat()">Chat</a></li>
-      <li><a ng-click="goToCalender()">Agenda</a></li>
-    </ul>
-    <form class="navbar-form navbar-left">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search" ng-model="searchResult" uib-typeahead="user.username for user in searchUsers($viewValue)"
-        typeahead-on-select="onSearchSelect($item)">
-        </div>
-    </form>
-    <ul class="nav navbar-nav navbar-right">
-      <li><img style="width: 40px;height: 40px;margin-top: 5px;" ng-src="{{profilePic}}"></li>
-      <li><a href="/user/{{username}}">{{firstname}}</a></li>
-      <li><a ng-click="logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-    </ul>
-  </div>
-</nav>
-<!-- for the children of main state -->
-<div ui-view></div>
+  </nav>
+  <!-- for the children of main state -->
+  <div ui-view></div>
 </body>
 </html>
