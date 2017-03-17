@@ -82,7 +82,12 @@
     </div>
   </div>
 </div>
-
+<script type="text/ng-template" id="customTemplate.html">
+<a>
+  <img ng-src="https://localhost:4000/public/{{match.model.profilePic}}" width="32">&nbsp;&nbsp;
+  {{match.model.name.firstname + ' ' + match.model.name.lastname}}
+</a>  
+</script>
 <script type="text/ng-template" id="addPeopleModal.html">
   <div class="modal-header">
       <h3 class="modal-title" id="modal-title">Add People</h3>
@@ -91,7 +96,7 @@
     Search for people: &nbsp;
       <div class="form-group">
       <input type="text" class="form-control" placeholder="Search Friends" ng-model="searchResult" uib-typeahead="user.username for user in searchFriends($viewValue)"
-        typeahead-on-select="onSearchSelect($item)">
+        typeahead-on-select="onSearchSelect($item)" typeahead-template-url="customTemplate.html">
       </div>
     <ul>
       <li ng-repeat="(id,p) in persons">{{p.username}}</li>
