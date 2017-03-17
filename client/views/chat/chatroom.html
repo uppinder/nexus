@@ -1,3 +1,40 @@
+<style type="text/css">
+  .talk-bubble {
+    margin: 40px;
+    display: inline-block;
+    position: relative;
+    width: 200px;
+    height: auto;
+    background-color: lightyellow;
+    padding: 3px;
+  }
+  /* Right triangle placed top left flush. */
+  .tri-right.border.left-top:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -40px;
+    right: auto;
+    top: -8px;
+    bottom: auto;
+    border: 32px solid;
+    border-color: #666 transparent transparent transparent;
+  }
+  .tri-right.left-top:after{
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -20px;
+    right: auto;
+    top: 0px;
+    bottom: auto;
+    border: 22px solid;
+    border-color: lightyellow transparent transparent transparent;
+  }
+</style>
+
 <div class="col-md-8 custom">
   <div class="panel panel-info" style="margin:0; height: 100%;">
     <div class="panel-body panel-height" ng-nicescroll nice-scroll-top-end="topEndComplete()" nice-scroll-end="endScroll()" style="overflow-y: scroll; height:90%">

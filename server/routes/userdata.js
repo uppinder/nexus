@@ -88,7 +88,8 @@ router.get('/pic', function(req, res) {
 
 		var payload = {
 			profilePic: acc.profilePic,
-			name: acc.username
+			name: acc.name,
+			username: acc.username
 		};
 
 		return res.status(200).json(payload);
@@ -122,7 +123,7 @@ router.post('/events/add',function(req, res) {
 				acc.event.addToSet(event._id);
 				acc.save(function(err) {
 					console.log(err);
-					return res.status(200).send();
+					return res.status(200).json({eventId:event._id});
 				});
 			});	
 		} else {
@@ -140,7 +141,7 @@ router.delete('/events/delete/:eventId', function(req,res) {
 		}
 		console.log("Deleted event :- " + event);
 	});
-	res.status(200).send();
+	res.status(200).json({status:"Deleted Successfully"});
 });
 
 // to update event
@@ -160,7 +161,7 @@ router.put('/events/update/:eventId', function(req,res) {
 				console.log(err);
 				return res.status(500).send()
 			} else {
-				return res.status(200).send();
+				return res.status(200).json({status:"Updated Successfully"});
 			}
 		});
 });

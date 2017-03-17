@@ -27,7 +27,6 @@ angular.module('nexus').controller('chatRoomController', ['$rootScope', '$scope'
 			}
 		}
 		
-
 		$scope.sendMsg = function(msg) {
 			if(!msg)
 				return;
@@ -66,6 +65,7 @@ angular.module('nexus').controller('chatRoomController', ['$rootScope', '$scope'
 
 			modalInstance.result.then(function(friends) {
 				if(!_.isEmpty(friends)) {
+					// console.log(friends, $rootScope.roomId);
 					chatroom.addFriends(friends, $rootScope.roomId);
 				}
 			}, function(err) {

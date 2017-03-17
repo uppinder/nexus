@@ -21,6 +21,7 @@ angular.module('nexus')
 			// rooms = _.keyBy(data.rooms, o => o.room_id);
 			// console.log(friends);
 			// console.log(rooms);
+
 			chatSocket.forward('update');
 		});
 

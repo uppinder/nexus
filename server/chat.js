@@ -24,9 +24,7 @@ exports.initUser = function(socket, user) {
 			self.chatRooms.forEach(function(room) {
 				socket.join(room.room_id);
 			});
-
-
-			// console.log(self.chatRooms);
+      
 			socket.emit('init', {
 				me: me,	
 				rooms: self.chatRooms
@@ -118,7 +116,6 @@ exports.addUsers = function(io, users, chatroom) {
 						self.chatRooms.addToSet({_id:room._id});
 						self.save();
 					}
-				});
 			});
 			// After adding user to chat room
 			// Emit socket event to all users that

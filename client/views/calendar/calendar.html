@@ -21,11 +21,58 @@
   <br>
   <mwl-calendar events="events" view="calendarView" view-title="calendarTitle" view-date="viewDate" on-event-click="" on-event-times-changed="calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd" cell-is-open="cellIsOpen" day-view-start="00:00" day-view-end="24:00" day-view-split="30" cell-modifier="modifyCell(calendarCell)" cell-auto-open-disabled="true" on-timespan-click="timespanClicked(calendarDate, calendarCell)"></mwl-calendar>
   <br><br><br>
+  <form class="form-horizontal">
+    <fieldset>
+      <legend>Add New Event</legend>
+    <div class="form-group">
+      <!-- title -->
+      <label class="control-label col-sm-2" for="title">Title:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="title" required="true" placeholder="New Event Title" ng-model="newTitle">
+      </div>
+      <!-- venue -->
+      <label class="control-label col-sm-2" for="venue">Venue:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="venue" placeholder="Event venue" ng-model="newVenue">
+      </div>
+    </div>
+    <!-- start date and end date -->
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="startdate">Starts:</label>
+      <div class="col-sm-4">
+        <input type="date" class="form-control" id="startdate" placeholder="Starting Time" ng-model="newStartsAt">
+      </div>
+      <label class="control-label col-sm-2" for="enddate">Ends:</label>
+      <div class="col-sm-4">
+        <input type="date" class="form-control" id="enddate" placeholder="Ending Time" ng-model="newEndsAt">
+      </div>
+    </div>
+    <!-- colour -->
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="primarycolor">Primary Colour:</label>
+      <div class="col-sm-4">
+        <input class="form-control" id="primarycolor" colorpicker type="color" ng-model="newColorPrimary">
+      </div>
+      <label class="control-label col-sm-2" for="secondarycolor">Secondary Colour:</label>
+      <div class="col-sm-4">
+        <input class="form-control" id="secondarycolor" colorpicker type="color" ng-model="newColorSecondary">
+      </div>
+    </div>
+    <!-- Description -->
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="description">Description:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="description" placeholder="Description" ng-model="newDescription">
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="button" class="btn btn-primary button-lg pull-right" ng-click="addEvent()">Add</button>
+    </div>
+  </fieldset>
+  </form>
   <h3 id="event-editor">
     Edit events
-    <button class="btn btn-primary pull-right" ng-click="addEvent()">Add new</button>
-    <div class="clearfix"></div>
-  </h3>
+  </h3><div class="clearfix"></div>
   <table class="table table-bordered">
     <thead>
       <tr>

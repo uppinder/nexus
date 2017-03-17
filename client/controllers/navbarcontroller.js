@@ -3,6 +3,7 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 
 		$scope.profilePic = 'https://localhost:4000/public/SkqEWypDx.jpg';
 		$scope.firstname = "";
+		$scope.username = "";
 
 		$scope.goToChat = function() {
 			$state.transitionTo('main.chat');
@@ -54,7 +55,8 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 		getData()
 		.then(function(data) {
 			$scope.profilePic = $location.protocol() + '://' + location.host + '/public/' + data.profilePic;
-			$scope.firstname = data.name;
+			$scope.firstname = data.name.firstname + " " + data.name.lastname ;
+			$scope.username = data.username;
 		})
 		.catch(function(err) {
 			console.log(err);
