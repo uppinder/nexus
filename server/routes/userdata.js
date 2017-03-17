@@ -4,6 +4,7 @@ var chatRoom = require('../models/chatroom.js');
 var shortid = require('shortid');
 var Event = require('../models/event.js')
 var _ = require('lodash');
+var async = require('async');
 
 router.get('/user/:id', function(req, res) {
 	User.findOne({username:req.params.id}, function(err, acc) {
@@ -29,6 +30,35 @@ router.get('/user/:id', function(req, res) {
 	});
 });
 
+router.get('/requests',function(req , res){
+	var user = req.user;
+	// console.log(user);
+	var names = [];
+	User.findById(user.id,function(err,user){
+		if(err) throw err;
+		// console.log(user.friends);
+		user.requestsNumber = 0;
+		user.save(function(err,user){
+			if(err) throw err;
+			async.forEach(user.friends,function(friend, callback){
+				User.findById(friend,function(err,user){
+					if(err) callback(err);
+					// console.log(user.name);
+					names.push(user.name.firstname + " " + user.name.lastname);
+					callback();
+				});
+			},function(err){
+				if(err){
+					console.log(err);
+					return callback(err);
+				}
+				// console.log(names);
+				return res.json(names);
+			});
+		})
+	})
+});
+
 router.post('/add', function(req, res) {
 	User.findOne({username:req.body.username}, function(err, acc) {
 		if(err || !acc) {
@@ -41,6 +71,8 @@ router.post('/add', function(req, res) {
 		User.findById(req.user._id, function(err, user) {
 			user.friends.addToSet(acc);
 			acc.friends.addToSet(req.user._id);
+
+			user.requestsNumber+=1;
 
 			// Create chatroom for these two
 			var room = new chatRoom({

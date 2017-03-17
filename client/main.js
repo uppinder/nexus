@@ -77,6 +77,15 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         restricted: true
       }
     })
+    // requests page 
+    .state('main.requests',{
+      url:'^/requests',
+      templateUrl:'views/requests/requests.html',
+      controller:'requestsController',
+      params:{
+        restricted:true
+      }
+    })
     // login page
     .state('login',{
       url: '/login',
