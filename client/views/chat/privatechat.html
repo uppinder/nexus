@@ -38,3 +38,14 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  // for each anchor that needs converting
+  $('.convertToImage').each(function() {
+    // get the href of the anchor
+    var href = $(this).attr('href');
+    // create the string we want to append to the anchor
+    var imgString = '<img src="' + href + '" alt="" />';
+    // and then append it
+    $(this).append(imgString);
+  });
+</script>

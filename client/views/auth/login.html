@@ -1,19 +1,22 @@
 <div class="flexbox-parent">
 	<md-content layout="row" layout-align="center center" layout-padding="layout-padding" ng-cloak="ng-cloak" class="login-form" style="min-height: 600px">
 	  <md-card flex="flex" flex-gt-sm="50" flex-gt-md="33">
-		<md-toolbar>
 	  	<md-card-header layout-align="center center">
-	  		<md-card-avatar><img ng-src="{{image}}" style="height: 100%;width: 100%"></md-card-avatar>
+	  			<img ng-src="{{image}}" style="height: 40%;width: 40%">
 	  	</md-card-header>
-		  <div class="md-toolbar-tools">
-			<h2><span>Login Form</span></h2>
-		  </div>
-		</md-toolbar>
+		<!-- <md-toolbar>
+			<md-card-header-text>
+				Login Portal
+			</md-card-header-text>
+		</md-toolbar> -->
 		<md-card-content>
 		  <form name="Form" ng-submit="login()">
-			<md-input-container class="md-block">
+			<md-input-container>
 			  <label>Webmail</label>
 			  <input type="text" name="email" ng-model="loginForm.username" placeholder="webmail" required=""/>
+			  </md-input-container>
+			  <md-input-container >
+			  <label>@iitg.ernet.in</label><input type="text" disabled="" readonly="">
 			  <div ng-messages="Form.email.$error" role="alert" multiple="">
 				<div ng-message="required" class="my-message">Please enter your email.</div>
 			  </div>
@@ -35,7 +38,9 @@
 	            <md-option value="teesta">Teesta</md-option>
 	          </md-select>
 	        </md-input-container>
-			<md-button type="submit" class="md-raised md-primary">&nbsp; Login &nbsp;</md-button>
+	        <md-imput-container class="md-block" layout="column" layout-align="center center">
+			<md-button type="submit" class="md-block md-raised md-primary">&nbsp; Login &nbsp;</md-button>
+		  	</md-imput-container>
 		  </form>
 		</md-card-content>
 	  </md-card>

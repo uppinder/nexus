@@ -6,8 +6,8 @@ var eventSchema = new Schema({
 	title: {type: String},
 	venue: {type: String},
 	color: {
-		primary: {type: String},
-		secondary: {type: String}
+		primary: {type: String, default: ""},
+		secondary: {type: String, default: ""}
 	},
 	startsAt: {type: Date, default: Date.now},
 	endsAt: {type: Date, default: Date.now},

@@ -1,3 +1,4 @@
+</style>
 <div class="container">
   <h2 class="text-center">{{ calendarTitle }}</h2>
   <div class="row">
@@ -57,7 +58,7 @@
         </div>
         <md-input-container class="md-block">
           <label>Description</label>
-          <textarea ng-model="newDescription" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+          <textarea ng-model="newDescription" md-maxlength="200" rows="2" md-select-on-focus></textarea>
         </md-input-container>
         <md-button ng-click="addEvent()" type="submit" class="md-raised md-primary">&nbsp; Add New Event &nbsp;</md-button>
         </fieldset>
@@ -119,7 +120,7 @@
         </td>
         <td>
           <md-input-container class="md-block" flex-gt-xs>
-            <textarea ng-model="event.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+            <textarea ng-model="event.description" md-maxlength="150" rows="6" md-select-on-focus></textarea>
           </md-input-container>
         </td>
         <td>

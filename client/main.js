@@ -14,7 +14,7 @@ var app = angular.module('nexus', [
 ]);
 
 // configuration of the app-module
-app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {
   
   $stateProvider
     // main home page (with no controller)
@@ -113,6 +113,15 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     // if none of the routes is vaild, then return a 404
     $urlRouterProvider.otherwise('/404');
     $locationProvider.html5Mode(true);
+
+    // color theme
+    // $mdThemingProvider.theme('myTheme')
+      // .primaryPalette('indigo')
+      // .accentPalette('green')
+      // .warnPalette('red')
+      // .backgroundPalette('light-grey');
+    // $mdThemingProvider.setDefaultTheme('myTheme');
+    // $mdThemingProvider.disableTheming();
 });
 
 app.run(function($location, $rootScope, $state, authService) {
