@@ -93,7 +93,7 @@ angular.module('nexus').controller('privateChatController', ['$scope', '$statePa
 			}).then(function(res) {
 				var fileUrl = $location.protocol() + '://' + location.host + '/d/' + res.data.fileName;
 				console.log(fileUrl);
-				var msg = '<a target="_blank" href="' + fileUrl +'">' + file.name + '</a>';
+				var msg = '<a class="convertToImage" target="_blank" href="' + fileUrl +'">' + file.name + '</a>';
 				$scope.sendMsg(msg);
 
 			}, function(err) {

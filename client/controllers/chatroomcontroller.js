@@ -8,9 +8,34 @@ angular.module('nexus').controller('chatRoomController', ['$rootScope', '$scope'
 		$scope.$on('socket:update', function() {
 			$scope.$apply();
 		});
+
 		
 		// $scope.messages = chatroom.getMessages($scope.roomId);	
 		// console.log($scope.messages);
+
+		$scope.chatImages = function () {
+			console.log("here");
+			$(function () {
+	            // wait till load event fires so all resources are available
+	            $(document).ready(setTimeout(
+					function() {
+	                // for each anchor that needs converting
+					$('.row').each(function() {
+					    // get the href of the anchor
+					    var href = $(this).attr('href');
+						alert(href);
+					    // console.log("href" + href);
+					    // create the string we want to append to the anchor
+					    // var imgString = '<img src="' + href + '" alt="" />';
+					    // and then append it
+					    // $(this).append(imgString);
+					});
+            	}, 5000);
+	            );
+			});
+		};
+
+		// $scope.chatImages();
 
 		$scope.getMessages = function() {
 			return chatroom.getMessages($scope.roomId);
@@ -70,7 +95,7 @@ angular.module('nexus').controller('chatRoomController', ['$rootScope', '$scope'
 			}).then(function(res) {
 				var fileUrl = $location.protocol() + '://' + location.host + '/d/' + res.data.fileName;
 				console.log(fileUrl);
-				var msg = '<a target="_blank" href="' + fileUrl +'">' + file.name + '</a>';
+				var msg = '<a class="convertToImage" target="_blank" href="' + fileUrl +'">' + file.name + '</a>';
 				$scope.sendMsg(msg);
 
 			}, function(err) {
