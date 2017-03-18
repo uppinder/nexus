@@ -5,15 +5,15 @@
 	  	<md-card-header layout-align="center center">
 	  		<md-card-avatar><img ng-src="{{image}}" style="height: 100%;width: 100%"></md-card-avatar>
 	  	</md-card-header>
-		  <div class="md-toolbar-tools">
-			<h2><span>Login Form</span></h2>
-		  </div>
 		</md-toolbar>
 		<md-card-content>
 		  <form name="Form" ng-submit="login()">
-			<md-input-container class="md-block">
+			<md-input-container>
 			  <label>Webmail</label>
 			  <input type="text" name="email" ng-model="loginForm.username" placeholder="webmail" required=""/>
+			  </md-input-container>
+			  <md-input-container >
+			  <label>@iitg.ernet.in</label><input type="text" disabled="">
 			  <div ng-messages="Form.email.$error" role="alert" multiple="">
 				<div ng-message="required" class="my-message">Please enter your email.</div>
 			  </div>

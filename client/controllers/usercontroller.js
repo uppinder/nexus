@@ -34,7 +34,7 @@ angular.module('nexus').controller('userController', ['$scope', '$http', '$locat
 			if(data.status == 404)
 				$state.go('404');
 			else {
-				// console.log(data);
+				// console.log(data.user);
 				$scope.name = data.user.name.firstname + " " + data.user.name.lastname;
 				$scope.username = data.user.username;
 				$scope.profilePic = $location.protocol() + '://' + location.host + '/public/' + data.user.profilePic;
