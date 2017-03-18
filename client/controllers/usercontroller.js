@@ -19,7 +19,12 @@ angular.module('nexus').controller('userController', ['$scope', '$http', '$locat
 			return $http.post('/user_data/add', {
 					username: $stateParams.id
 				})
-				.then(function() {					
+				.then(function() {
+					console.log($scope);
+					console.log($stateParams);
+					// console.log(user);
+					// if(user.verified){
+					// }					
 				}, function(err) {
 					console.log(err);
 				});

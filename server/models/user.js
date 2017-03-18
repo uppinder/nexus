@@ -21,6 +21,7 @@ var userSchema = new Schema({
 	verified: {type: Boolean, default: false},
 	friends: [{type: Schema.Types.ObjectId, ref: 'User'}],
 	chatRooms: [{type: Schema.Types.ObjectId, ref: 'Chatroom'}],
+	requestsNumber : {type:Number, default:0},
 	event: [{type:Schema.Types.ObjectId, ref: 'event'}],
 });
 
