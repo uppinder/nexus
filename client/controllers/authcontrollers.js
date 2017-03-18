@@ -2,6 +2,7 @@ angular.module('nexus').controller('loginController', ['$scope', '$state', 'auth
 	function($scope, $state, authService) {
 
 		$scope.error = false;
+		$scope.image = "https://localhost:4000/public/iit.png";
 		$scope.login = function() {
 
 			// initial value

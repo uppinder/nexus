@@ -123,7 +123,7 @@ router.post('/new', function(req,res) {
     user.name.lastname = req.body.lastname;
     user.gender = req.body.gender;
     user.rollNo = req.body.rollNumber;
-    user.programme = req.body.programme;
+    user.program = req.body.programme;
     user.branch = req.body.branch;
     user.doj = req.body.doj;
     user.dob = req.body.dob;

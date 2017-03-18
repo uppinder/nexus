@@ -1,6 +1,33 @@
-<img ng-src="{{profilePic}}">
-<h1>{{name}}</h1><h3>({{username}})</h3>
-<button ng-click="addFriend()" ng-show="!isFriend">Add Friend</button>
-<p ng-show="isFriend">
-<b>Friends!</b>
-</p>
+<div ng-cloak class="flexbox-parent">
+  <md-content layout="row" layout-align="center center" layout-padding="layout-padding" ng-cloak="ng-cloak" class="login-form" style="min-height: 600px">
+    <div flex-xs flex-gt-xs="50" layout="column">
+      <md-card md-theme="dark-grey" md-theme-watch>
+        <img ng-src="{{profilePic}}" style="height: 180px; width: 180px; margin-left: 42%; margin-top: 20px;" class="md-card-image" alt="Washed Out">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{name}}
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button ng-click="addFriend()" ng-show="!isFriend" class="md-raised md-primary" >Add Friend</md-button>
+              <md-button ng-show="isFriend" ng-disabled="true" class="md-raised md-primary">Already Friends</md-button>
+            </md-card-actions></span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <md-input-container class="md-block">
+          	<label>Webmail</label>
+	  		<input type="text" ng-model="username" disabled="" />
+		  </md-input-container>
+		  <md-input-container class="md-block">
+          	<label>Roll No.</label>
+	  		<input type="text" ng-model="rollno" disabled/>
+		  </md-input-container>
+		  <md-input-container class="md-block">
+          	<label>Programme</label>
+	  		<input type="text" ng-model="program" disabled/>
+		  </md-input-container>
+		  <md-input-container class="md-block">
+          	<label>Branch</label>
+	  		<input type="text" ng-model="branch" disabled/>
+		  </md-input-container>
+        </md-card-content>
+      </md-card>

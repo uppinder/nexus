@@ -32,6 +32,7 @@
                             <div ng-message="required" class="my-message">Please enter your Last Name.</div>
                         </div>
                     </md-input-container>
+                    <!--
                     <md-input-container class="md-block">
                         <label>Roll Number</label>
                         <input type="text" name="rollNumber" ng-model="rollNumber" placeholder="170101001" required=""/>
@@ -39,6 +40,7 @@
                             <div ng-message="required" class="my-message">Please enter your Roll Name.</div>
                         </div>
                     </md-input-container>
+                    -->
                     <md-input-container class="md-block">
                       <md-radio-group ng-model="gender" layout="row">
                         <md-radio-button value="Male" class="md-primary"> Male </md-radio-button>
@@ -48,18 +50,25 @@
                     <md-input-container class="md-block">
                       <label>Programme</label>
                       <md-select name="programme" ng-model="programme" required="">
-                        <md-option value="btech">B. Tech</md-option>
-                        <md-option value="mtech">M. Tech</md-option>
-                        <md-option value="phd">PHD</md-option>
+                        <md-option value="Bachelor of Technology">B. Tech</md-option>
+                        <md-option value="Master of Technology">M. Tech</md-option>
+                        <md-option value="PHD">PHD</md-option>
                       </md-select>
                     </md-input-container>
                     <md-input-container class="md-block">
                       <label>Branch</label>
                       <md-select name="branch" ng-model="branch" required="">
-                        <md-option value="CSE">Computer Science & Engineering</md-option>
-                        <md-option value="mech">Mechanical</md-option>
-                        <md-option value="civil">Civil</md-option>
-                        <md-option value=""></md-option>
+                        <md-option value="Bioscience & Bioengineering">Bioscience & Bioengineering</md-option>
+                        <md-option value="Chemical Engineering">Chemical Engineering</md-option>
+                        <md-option value="Chemistry">Chemistry</md-option>
+                        <md-option value="Civil Engineering">Civil Engineering</md-option>
+                        <md-option value="Computer Science & Engineering">Computer Science & Engineering</md-option>
+                        <md-option value="Design">Design</md-option>
+                        <md-option value="Electronics & Electrical Engineering">Electronics & Electrical Engineering</md-option>
+                        <md-option value="Humanities & Social Science">Humanities & Social Science</md-option>
+                        <md-option value="Mathematics">Mathematics</md-option>
+                        <md-option value="Mechanical Engineering">Mechanical Engineering</md-option>
+                        <md-option value="Physics">Physics</md-option>
                       </md-select>
                     </md-input-container class="md-block">
                     <md-input-container class="md-block">
