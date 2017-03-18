@@ -1,11 +1,10 @@
-angular.module('nexus').controller('userController', ['$scope', '$http', '$location', '$state', '$stateParams',
+angular.module('nexus').controller('userController', ['$scope', '$http', '$location', '$state', '$stateParams', 
 	function($scope, $http, $location, $state, $stateParams) {
 
 		$scope.name = "";
 		$scope.username = "";
 		$scope.profilePic = "";
 		$scope.isFriend = false;
-
 		function getInfo() {
 			return $http.get('/user_data/user/' + $stateParams.id)
 					.then(function(res) {
@@ -35,6 +34,9 @@ angular.module('nexus').controller('userController', ['$scope', '$http', '$locat
 				$scope.username = data.user.username;
 				$scope.profilePic = $location.protocol() + '://' + location.host + '/public/' + data.user.profilePic;
 				$scope.isFriend = data.isFriend;
+				$scope.program = data.user.program;
+				$scope.branch = data.user.branch;
+				$scope.rollno = data.user.rollNo;
 			}
 		})
 		.catch(function(err) {

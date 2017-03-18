@@ -2,6 +2,18 @@ angular.module('nexus').controller('initialInfoController', ['$scope', '$state',
 	function($scope, $state, $http, Upload) {
 		
 		$scope.nextButton = false;
+
+		var next = function() {
+			gotInitialInfo()
+			.then(function() {
+				$state.go('main');
+			})
+			.catch(function(err) {
+				console.log('Error:', err);
+			});
+		};
+
+
 		$scope.upload = function(dataUrl, name) {
 			Upload.upload({
 				url:'upload/profilepic',	
@@ -21,7 +33,7 @@ angular.module('nexus').controller('initialInfoController', ['$scope', '$state',
 					dob: $scope.dob,
 					doy: $scope.doy
 				}).then( function() {
-					$scope.nextButton = true;
+					next();
 				}, function() {
 					console.log("error");
 				})
@@ -39,15 +51,5 @@ angular.module('nexus').controller('initialInfoController', ['$scope', '$state',
 						console.log(res);
 					});
 		}
-
-		$scope.next = function() {
-			gotInitialInfo()
-			.then(function() {
-				$state.go('main');
-			})
-			.catch(function(err) {
-				console.log('Error:', err);
-			});
-		};
 	}
 ]);

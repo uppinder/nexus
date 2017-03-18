@@ -1,7 +1,10 @@
 <div class="flexbox-parent">
 	<md-content layout="row" layout-align="center center" layout-padding="layout-padding" ng-cloak="ng-cloak" class="login-form" style="min-height: 600px">
-	  <md-card flex="flex" flex-gt-sm="50" flex-gt-md="33"> 
+	  <md-card flex="flex" flex-gt-sm="50" flex-gt-md="33">
 		<md-toolbar>
+	  	<md-card-header layout-align="center center">
+	  		<md-card-avatar><img ng-src="{{image}}" style="height: 100%;width: 100%"></md-card-avatar>
+	  	</md-card-header>
 		  <div class="md-toolbar-tools">
 			<h2><span>Login Form</span></h2>
 		  </div>
@@ -23,7 +26,7 @@
 			  </div>
 			</md-input-container>
 			<md-input-container class="md-block">
-	          <label>Webmail</label>
+	          <label>Server</label>
 	          <md-select name="server" ng-model="loginForm.mailServer" required="">
 	            <md-option value="dikrong">Dikrong</md-option>
 	            <md-option value="disang">Disang</md-option>
