@@ -95,9 +95,12 @@ router.get('/initial', function(req, res) {
 
 router.get('/logout', function(req, res) {
   req.logout();
-  req.session.destroy();
-  res.status(200).json({
-    status: 'Bye!'
+  req.session.destroy(function() {
+    res.clearCookie('nexus.sid', {path:'/'});
+    res.clearCookie('io', {path:'/'});
+    return res.status(200).json({
+      status: 'Bye!'
+    });
   });
 });
 
