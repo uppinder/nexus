@@ -1,0 +1,49 @@
+<style type="text/css">
+	.chat-sidebar { 
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+
+	.chat-container {
+		display: flex;
+		flex-direction: row;
+		flex: 5;
+		background-image: url("../public/back.jpg");
+	}
+</style>
+<!-- For chat.html -->
+<div class="chat-sidebar w3-red">
+	<a ng-click="goToPrivate()">
+		<div class="w3-display-container w3-white w3-hover-black w3-border-bottom w3-border-black" style="height: 80px;">
+			<div class="w3-display-middle">Friends</div>
+		</div>
+	</a>
+	<div class="w3-display">
+		<h2><center>Groups
+		<button class="w3-button w3-circle w3-black" ng-click="newRoom()">+</button></center></h2>
+	</div>
+	<div style="overflow-y: auto;">
+	<a ng-repeat="(key, room) in getRooms()" ng-click="goToRoom(room.room_id)">
+		<div class="w3-display-container w3-white w3-hover-black w3-border-top w3-border-black" style="height: 80px;">
+			<div class="w3-display-middle">{{room.name}}</div>
+		</div>
+	</a>
+	</div>
+</div>
+<div class="chat-container" ui-view> <!-- ui-view -->
+</div>
+
+<script type="text/ng-template" id="newRoomModal.html">
+  <div class="modal-header">
+      <h3 class="modal-title" id="modal-title">Create Room</h3>
+  </div>
+  <div class="modal-body" id="modal-body">
+    Choose a name for the room: &nbsp;
+    <input type="text" ng-model="roomName" required>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" type="button" ng-click="ok()">Ok</button>
+      <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>
+</script>

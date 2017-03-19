@@ -12,6 +12,7 @@ angular.module('nexus').controller('chatController', ['$scope', '$state', '$uibM
 		}
 
 		$scope.goToRoom = function(id) {
+			console.log(id);
 			$state.transitionTo('main.chat.room', {roomId:id});
 		}
 

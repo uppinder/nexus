@@ -1,0 +1,45 @@
+<style type="text/css">
+	.room-header {
+		background-color: yellow;
+		flex: 0 0 60px;
+	}
+	.chat-messages {
+		background-image: url("../public/back.jpg");
+		flex: 1;
+		height: 100vh;
+		overflow: scroll;
+	}
+	.chat-input {
+		background-color: brown;
+		flex: 0 0 100px;
+	}
+	input[name="message"] {
+		height: 50px;
+		width: 100%;
+		padding-left: 5px;
+		outline: none;
+	}
+	input[name="message"]:focus {
+		outline: none;
+	}
+</style>
+<div class="room-header w3-red w3-container w3-bottombar w3-border-white">
+		<h1 class="w3-center">{{getPrivateRoomName()}}</h1>
+</div>
+<div class="chat-messages w3-teal w3-padding-large w3-container" ng-nicescroll nice-scroll-top-end="topEndComplete()" nice-scroll-end="endScroll()">
+	<div ng-repeat="msg in getPrivateMessages()" class="w3-panel w3-round w3-padding-large w3-red" style="text-overflow: ellipsis;">
+	    {{msg.meta.sent_time | date:"h:mm a"}} {{msg.meta.sender.name.firstname + ' ' + msg.meta.sender.name.lastname}} :  
+       <div ng-bind-html="msg.text"></div>  
+	</div>
+	<div ng-repeat="(key,user) in getPrivateIsTyping()" class="w3-panel w3-round w3-padding-large" style="text-overflow: ellipsis;">
+	    {{user.name.firstname}} is typing..... 
+	</div>
+</div>
+<div class="chat-input w3-display-container w3-white w3-border-top w3-border-gray w3-padding-jumbo">
+	<div class="input-group">
+		<span class="input-group-addon btn btn-default" ngf-select="upload($file)">
+          <span class="glyphicon glyphicon-file"></span>	
+		</span> 
+		<input ng-model="m" type="text" ng-keydown="checkText($event)" autofocus name="message" placeholder="Send Message">			
+	</div>		
+</div>

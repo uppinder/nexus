@@ -1,6 +1,10 @@
 angular.module('nexus').controller('privateMainController', ['$scope', '$rootScope', '$state', 'chatroom', 
 	function($scope, $rootScope, $state, chatroom) {	
 
+		$scope.avatar_style = {
+			'border-radius':'50px'
+		};
+
 		$scope.$on('socket:update', function() {
 			$scope.$apply();
 		});
@@ -11,10 +15,14 @@ angular.module('nexus').controller('privateMainController', ['$scope', '$rootSco
 
 			_.forEach(friends, function(friend, key) {
 				console.log(friend.members);
-				if(friend.members[0].user.username == $scope.me.name)
-					friend.name = friend.members[1].user.username;
-				else
-					friend.name = friend.members[0].user.username;
+				if(friend.members[0].user.username == $scope.me.name) {
+					friend.name = friend.members[1].user.name.firstname + ' ' + friend.members[1].user.name.lastname;
+					friend.pic = friend.members[1].user.profilePic;
+				}
+				else {
+					friend.name = friend.members[0].user.name.firstname + ' ' + friend.members[0].user.name.lastname;
+					friend.pic = friend.members[0].user.profilePic;
+				}
 			});
 
 			return friends;

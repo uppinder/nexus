@@ -9,6 +9,10 @@ angular.module('nexus').controller('chatRoomController', ['$rootScope', '$scope'
 			$scope.$apply();
 		});
 		
+		$scope.avatar_style = {
+			'border-radius':'50px'
+		};
+
 		// $scope.messages = chatroom.getMessages($scope.roomId);	
 		// console.log($scope.messages);
 

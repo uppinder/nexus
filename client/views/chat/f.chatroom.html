@@ -1,0 +1,90 @@
+<style type="text/css">
+	.chat-content {
+		display: flex;
+		flex-direction: column;
+		flex: 4;
+	}/*
+	.room-header {
+		background-color: yellow;
+		flex: 0 0 60px;
+	}*/
+	.chat-messages {
+		background-image: url("../public/back.jpg");
+		flex: 1;
+		height: 100vh;
+		overflow: auto;
+	}
+	.chat-input {
+		flex: 0 0 80px;
+	}
+	.room-sidebar {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+	input[name="message"] {
+		height: 50px;
+		width: 100%;
+		padding-left: 5px;
+		outline: none;
+	}
+	input[name="message"]:focus {
+		outline: none;
+	}
+</style>
+<!-- For chatroom.html -->
+<div class="chat-content">
+	<div class="chat-messages w3-teal w3-padding-large w3-container" ng-nicescroll nice-scroll-top-end="topEndComplete()" nice-scroll-end="endScroll()">
+		<div ng-repeat="msg in getMessages()" class="w3-panel w3-round w3-padding-large w3-red" style="text-overflow: ellipsis;">
+		    {{msg.meta.sent_time | date:"h:mm a"}} {{msg.meta.sender.name.firstname + ' ' + msg.meta.sender.name.lastname}} :  
+           <div ng-bind-html="msg.text"></div>  
+		</div>
+		<div ng-repeat="(key,user) in getIsTyping()" class="w3-panel w3-round w3-padding-large" style="text-overflow: ellipsis;">
+		    {{user.name.firstname}} is typing..... 
+		</div>
+	</div>
+	<div class="chat-input w3-display-container w3-white w3-border-top w3-border-gray w3-padding-jumbo">
+		<div class="input-group">
+			<span class="input-group-addon btn btn-default" ngf-select="upload($file)">
+	          <span class="glyphicon glyphicon-file"></span>	
+			</span> 
+			<input ng-model="m" type="text" ng-keydown="checkText($event)" autofocus name="message" placeholder="Send Message">			
+		</div>		
+	</div>
+</div>
+<div class="room-sidebar w3-red">
+	<div class="w3-display">
+		<h3><center>Users&nbsp;<button class="w3-button w3-circle w3-black" ng-click="addPeople()">+</button></center></h3>
+	</div>
+	<div style="overflow-y: auto;">
+		<div ng-repeat="p in getMembers()" class="w3-display-container w3-white w3-hover-black w3-border-top w3-border-black" style="height: 50px;">
+			<div class="w3-display-middle"><img ng-style="avatar_style" ng-src="https://localhost:4000/public/{{p.user.profilePic}}" style="width:32px; margin:5px">&nbsp;&nbsp;{{p.user.name.firstname}}</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/ng-template" id="customTemplate.html">
+<a>
+  <img ng-src="https://localhost:4000/public/{{match.model.profilePic}}" width="32">&nbsp;&nbsp;
+  {{match.model.name.firstname + ' ' + match.model.name.lastname}}
+</a>  
+</script>
+<script type="text/ng-template" id="addPeopleModal.html">
+  <div class="modal-header">
+      <h3 class="modal-title" id="modal-title">Add People</h3>
+  </div>
+  <div class="modal-body" id="modal-body">
+    Search for people: &nbsp;
+      <div class="form-group">
+      <input type="text" class="form-control" placeholder="Search Friends" ng-model="searchResult" uib-typeahead="user.username for user in searchFriends($viewValue)"
+        typeahead-on-select="onSearchSelect($item)" typeahead-template-url="customTemplate.html">
+      </div>
+    <ul>
+      <li ng-repeat="(id,p) in persons">{{p.username}}</li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" type="button" ng-click="ok()">Ok</button>
+      <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>
+</script>

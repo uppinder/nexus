@@ -1,0 +1,31 @@
+<!-- <style type="text/css">
+	.card {
+		align-self: stretch;
+	}
+</style>
+<div class="card w3-container w3-red w3-padding">
+	<div class="w3-cardw3-white" style="width: 50%">
+		<center>Testing</center>
+	</div>
+</div> -->
+
+<style type="text/css">
+	.card-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex: 1;
+	}
+</style>
+<div class="card-container w3-red w3-container w3-padding">
+	<div class="w3-card w3-white" style="width: 50%">
+		<div class="w3-container w3-center w3-padding-large">
+			<center><div class="w3-display-container w3-hover-opacity" style="width: 50%">
+				<img ng-src="{{profilePic}}" style="width: 100%;">
+				<button class="w3-btn w3-animate-opacity w3-red" ng-click="addFriend()" ng-show="!isFriend" >Add Friend</button>
+				<button class="w3-btn w3-animate-opacity w3-blue" ng-show="isFriend" >Friends!</button>
+			</div></center>
+			<h1>{{name}}</h1>
+		</div>
+	</div>
+</div>

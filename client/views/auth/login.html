@@ -1,6 +1,14 @@
-<div class="flexbox-parent">
+<style type="text/css">
+	.card-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex: 1;
+	}
+</style>
+<div class="card-container flexbox-parent">
 	<md-content layout="row" layout-align="center center" layout-padding="layout-padding" ng-cloak="ng-cloak" class="login-form" style="min-height: 600px">
-	  <md-card flex="flex" flex-gt-sm="50" flex-gt-md="33">
+	  <md-card flex="flex" style="min-width: 400px;">
 		<md-toolbar>
 	  	<md-card-header layout-align="center center">
 	  		<md-card-avatar><img ng-src="{{image}}" style="height: 100%;width: 100%"></md-card-avatar>

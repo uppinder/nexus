@@ -4,21 +4,24 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 		$scope.profilePic = 'https://localhost:4000/public/SkqEWypDx.jpg';
 		$scope.firstname = "";
 		$scope.username = "";
+		$scope.avatar_style = {
+			'border-radius':'50px'
+		};
 
 		$scope.goToChat = function() {
 			$state.transitionTo('main.chat');
 		};
 
-		$scope.goToCalender = function() {
+		$scope.goToCalendar = function() {
 			$state.transitionTo('main.calendar');
 		};
 
 		$scope.goToRequests = function(){
 			$state.transitionTo('main.requests');
 		}
-		// redirect main to the chatrooms list
-		if($state.current.name == 'main')
-			$scope.goToChat();
+		// // redirect main to the chatrooms list
+		// if($state.current.name == 'main')
+		// 	$scope.goToChat();
 
 
 		$scope.logout = function() {
@@ -29,18 +32,6 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 				});
 		}
 
-		$scope.searchUsers = function(val) {
-			return $http.get('/search/all', {params: {key:val}})
-					.then(function(res) {
-						return res.data.result;
-						// console.log(res.data.result[0]);
-					});
-		}
-
-		$scope.onSearchSelect = function($item) {
-			$scope.searchResult = "";
-			$state.go('main.user', {id:$item.username});
-		}
 
 		function getData() {
 			return $http({
@@ -67,3 +58,20 @@ angular.module('nexus').controller('navbarController', ['$scope','$state', 'auth
 
 	}
 ]);
+
+angular.module('nexus').controller('searchbarController', 
+	function($scope, $http, $state) {
+	
+		$scope.searchUsers = function(val) {
+			return $http.get('/search/all', {params: {key:val}})
+					.then(function(res) {
+						return res.data.result;
+					});
+		}
+
+		$scope.onSearchSelect = function($item) {
+			$scope.searchResult = "";
+			$state.transitionTo('main.user', {id:$item.username});
+		}
+
+});

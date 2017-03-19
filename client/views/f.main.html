@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+	* {
+		font-family: "Montserrat", sans-serif
+	}
+	.sidebar {
+		background-color: black;
+		color: white;
+		flex: 0 0 150px;
+	}
+	.w3-sidebar {
+		width: 150px;
+		background: #222; 
+	}
+
+	.main-container {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.searchbar {
+		background-color: #222;
+		height: 60px;
+		padding: 5px;
+		padding-left: 5px;
+	}
+	input[id="search-box"] {
+	    width: 20%;
+	    box-sizing: border-box;
+	    border: 2px solid #ccc;
+	    border-radius: 4px;
+	    font-size: 16px;
+	    background-color: white;
+	    background-image: url('../public/searchicon.png');
+	    background-position: 10px 10px; 
+	    background-repeat: no-repeat;
+	    padding: 10px 18px 10px 38px;
+	    -webkit-transition: width 0.4s ease-in-out;
+	    transition: width 0.4s ease-in-out;
+	}
+
+	input[id="search-box"]:focus {
+	    width: 80%
+	}
+	.view-content {
+		flex: 1;
+		display: flex;
+		flex-direction: row;
+	}
+
+</style>
+ <script type="text/ng-template" id="customTemplate.html">
+  <a style="width: 800px">
+    <h5>
+    <img ng-src="https://localhost:4000/public/{{match.model.profilePic}}" width="32">&nbsp;&nbsp;&nbsp;
+    {{match.model.name.firstname + ' ' + match.model.name.lastname}}</h5>
+  </a>  
+  </script>
+<div class="sidebar w3-black" ng-controller="navbarController">
+	<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+      <!-- Avatar image in top left corner -->
+      <img ng-style="avatar_style" ng-src="{{profilePic}}" style="width:100px; margin:5px">
+      <a ng-click="goToChat()"" class="w3-bar-item w3-button w3-padding-xxlarge w3-hover-black">
+          <i class="fa fa-commenting w3-xxlarge"></i>
+	        <p>CHAT</p>
+      </a>
+      <a ng-click="goToCalendar()" class="w3-bar-item w3-button w3-padding-xxlarge w3-hover-black">
+        <i class="fa fa-calendar w3-xxlarge"></i>
+       	 <p>CALENDAR</p>
+      </a>
+      <a ng-click="logout()" class="w3-bar-item w3-button w3-padding-xxlarge w3-hover-black">
+        <i class="fa fa-close w3-xxlarge"></i>
+      	  <p>LOGOUT</p>
+      </a>
+    </nav>
+</div>
+
+<div class="main-container">
+	<div class="searchbar" ng-controller="searchbarController">
+		<form class="search-form">
+			<input type="text" id="search-box" placeholder="Search..." ng-model="searchResult" uib-typeahead="user.username for user in searchUsers($viewValue)"
+      typeahead-on-select="onSearchSelect($item)" typeahead-template-url="customTemplate.html">
+		</form>
+	</div>
+	<div class="view-content" ui-view> <!-- ui-view -->
+	</div>
+</div>

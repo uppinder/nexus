@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {width: 120px;background: #222; }
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.flex-item {
+  flex-grow: 1;
+  height: 100vh;
+}
+</style>
+<body style="height: 100vh">
+  <div class="w3-black flex-container">
+  <!-- Icon Bar (Sidebar - hidden on small screens) -->
+  <div class="flex-item" style="width: 10%">
+    <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+      <!-- Avatar image in top left corner -->
+      <img src="../public/iit.png" style="width:100%">
+      <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
+        <div class="w3-display-container">
+          <i class="fa fa-home w3-xxlarge"></i>
+          <span class="w3-badge w3-red w3-display-topright">5</span>
+        </div>
+        <p>HOME</p>
+      </a>
+      <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+        <i class="fa fa-user w3-xxlarge"></i>
+        <p>ABOUT</p>
+      </a>
+      <a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+        <i class="fa fa-eye w3-xxlarge"></i>
+        <p>PHOTOS</p>
+      </a>
+      <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+        <i class="fa fa-envelope w3-xxlarge"></i>
+        <p>CONTACT</p>
+      </a>
+    </nav>
+  </div>
+  <!-- <div class="" style="padding-left: 10%"> -->
+     <div class="w3-green w3-container flex-item" style="width:20%">
+      <h2>w3-first</h2> 
+    </div>
+    <div class="w3-blue w3-container flex-item" style="width:50%">
+      <h2>w3-second</h2> 
+    <div class="w3-red w3-container flex-item" style="width:20%;">
+      <h2>w3-third</h2>
+    </div>
+  <!-- </div>    -->
+</div>
+
+</body>
+</html>

@@ -20,7 +20,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     // main home page (with no controller)
     .state('main', {
       url: '/',
-      templateUrl: 'views/main.html',
+      templateUrl: 'views/f.main.html',
       params: {
         restricted: true
       }
@@ -28,7 +28,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     // chat
     .state('main.chat', {
       url: '^/chat',
-      templateUrl: 'views/chat/chat.html',
+      templateUrl: 'views/chat/f.chat.html',
       controller: 'chatController',
       params: {
         restricted: true
@@ -37,7 +37,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     // chat ==> chat rooms 
     .state('main.chat.room', {
       url: '/room/:roomId',
-      templateUrl: 'views/chat/chatroom.html',
+      templateUrl: 'views/chat/f.chatroom.html',
       controller: 'chatRoomController',
       params: {
         restricted: true
@@ -45,7 +45,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.chat.private', {
       url:'/p',
-      templateUrl:'views/chat/private.html',
+      templateUrl:'views/chat/f.private.html',
       controller: 'privateMainController',
       params: {
         restricted: true
@@ -53,7 +53,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.chat.private.chat', {
       url: '/:id',
-      templateUrl: 'views/chat/privatechat.html',
+      templateUrl: 'views/chat/f.privatechat.html',
       controller: 'privateChatController',
       restricted: {
         restricted: true
@@ -62,7 +62,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     // user page
     .state('main.user', {
       url: '^/user/:id',
-      templateUrl: 'views/user.html',
+      templateUrl: 'views/f.user.html',
       controller: 'userController',
       params: {
         restricted: true

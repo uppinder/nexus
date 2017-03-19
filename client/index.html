@@ -4,10 +4,18 @@
 	<meta charset="utf-8">
 	<title>Nexus</title>
 	<base href="/">
+	<style type="text/css">
+		* {
+			margin: 0;
+		}
+		[ng-click] {
+      		cursor: pointer;
+    	}
+	</style>
 </head>
 <body>
 	<!-- Our views will go here -->
-	<div ui-view></div>
+	<div ui-view style="display: flex; flex-direction: row; height: 100vh; width: 100%;"></div>
 
 	<!-- Dependencies -->
 	<script type="text/javascript" src="./include/lodash.min.js"></script>
@@ -38,7 +46,7 @@
 	<link rel="stylesheet" type="text/css" href="./include/ng-img-crop/compile/minified/ng-img-crop.css">
 	<link rel="stylesheet" type="text/css" href="./include/ng-material-datetimepicker/dist/material-datetimepicker.min.css">
 	<link rel="stylesheet" type="text/css" href="./include/md-color-picker/dist/mdColorPicker.min.css">
-	<link rel="stylesheet" type="text/css" href="./include/main.css">
+<link rel="stylesheet" type="text/css" href="./include/main.css">
   	<script type="text/javascript" src="./main.js"></script>
 	
 	<!-- Services and controllers -->
